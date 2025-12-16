@@ -109,7 +109,7 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
                                     </div>
                                 </div>
                                 {project.tags?.map(tag => (
-                                     <span key={tag} className="inline-block bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400 text-xs px-2 py-1 rounded">
+                                     <span key={tag} className="inline-block bg-[#FBEDE6] text-[#C2392E] dark:bg-orange-900/20 text-xs px-2 py-1 rounded">
                                         {tag}
                                     </span>
                                 ))}

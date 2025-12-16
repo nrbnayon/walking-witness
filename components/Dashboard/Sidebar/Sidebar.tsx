@@ -93,8 +93,8 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
         icon: ShoppingBasket03Icon,
       },
       {
-        label: "Project",
-        href: "/project",
+        label: "Projects",
+        href: "/projects",
         icon: Briefcase01Icon,
       },
       {
