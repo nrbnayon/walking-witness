@@ -8,6 +8,7 @@ import { usersData } from "@/data";
 import { UserType, User } from "@/types";
 import { useState } from "react";
 import { DeleteConfirmationModal } from "@/components/Dashboard/Shared/DeleteConfirmationModal";
+import { toast } from "sonner";
 
 interface UsersTableProps {
   limit?: number;
@@ -18,14 +19,23 @@ interface UsersTableProps {
 export function UsersTable({ limit, filter = "All", showPagination = false }: UsersTableProps) {
   const [allUsers, setAllUsers] = useState<User[]>(usersData);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const filteredUsers = filter === "All" 
     ? allUsers 
     : allUsers.filter(u => u.type === filter);
   
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (userToDelete) {
+      setIsDeleting(true);
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
       setAllUsers(prev => prev.filter(u => u.id !== userToDelete.id));
+      toast.success("User deleted successfully");
+      
+      setIsDeleting(false);
       setUserToDelete(null);
     }
   };
@@ -123,8 +133,9 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
       )}
       <DeleteConfirmationModal 
         isOpen={!!userToDelete}
-        onClose={() => setUserToDelete(null)}
+        onClose={() => !isDeleting && setUserToDelete(null)}
         onConfirm={handleDelete}
+        isLoading={isDeleting}
         title="Delete User"
         description={`Are you sure you want to delete ${userToDelete?.name}? This action cannot be undone.`}
       />

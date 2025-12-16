@@ -15,9 +15,10 @@ export function DeleteConfirmationModal({
   isOpen,
   onClose,
   onConfirm,
+  isLoading = false,
   title = "Delete User",
   description = "Are you sure you want to delete this user? This action cannot be undone.",
-}: DeleteConfirmationModalProps) {
+}: DeleteConfirmationModalProps & { isLoading?: boolean }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export function DeleteConfirmationModal({
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
-        onClick={onClose}
+        onClick={!isLoading ? onClose : undefined}
       />
 
       {/* Modal Container */}
@@ -50,7 +51,8 @@ export function DeleteConfirmationModal({
       >
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          disabled={isLoading}
+          className="absolute right-4 top-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <X className="w-5 h-5" />
         </button>
@@ -77,18 +79,21 @@ export function DeleteConfirmationModal({
           <div className="flex gap-3">
              <button
               onClick={onClose}
-              className="flex-1 px-4 py-2.5 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 font-semibold transition-colors"
+              disabled={isLoading}
+              className="flex-1 px-4 py-2.5 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
             <button
-              onClick={() => {
-                onConfirm();
-                onClose();
-              }}
-              className="flex-1 px-4 py-2.5 bg-gradient-red hover:bg-red-700 text-white rounded-lg font-semibold shadow-sm transition-colors cursor-pointer"
+              onClick={onConfirm}
+              disabled={isLoading}
+              className="flex-1 flex items-center justify-center px-4 py-2.5 bg-gradient-red hover:bg-red-700 text-white rounded-lg font-semibold shadow-sm transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Delete
+              {isLoading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                "Delete"
+              )}
             </button>
           </div>
         </div>
