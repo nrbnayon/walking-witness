@@ -1,16 +1,34 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, Tooltip, Cell, YAxis } from "recharts";
 import { monthlyViewsData } from "@/data";
 
 export function MonthlyViewsChart() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+       <div className="bg-gray dark:bg-gray-800 p-6 rounded-md shadow-none border border-gray-100 dark:border-gray-700 h-[400px]">
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50">Monthly Views</h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Viewers over last year</p>
+        </div>
+        <div className="w-full h-[85%]" /> 
+      </div>
+    );
+  }
   return (
     <div className="bg-gray dark:bg-gray-800 p-6 rounded-md shadow-none border border-gray-100 dark:border-gray-700 h-[400px]">
       <div className="mb-6">
         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50">Monthly Views</h3>
         <p className="text-sm text-gray-500 dark:text-gray-400">Viewers over last year</p>
       </div>
-      <ResponsiveContainer width="100%" height="85%">
+      <ResponsiveContainer width="100%" height="85%" minWidth={0}>
         <BarChart data={monthlyViewsData} barGap={8}>
           <XAxis 
             dataKey="name" 

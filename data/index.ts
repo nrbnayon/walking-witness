@@ -4,7 +4,7 @@ export const usersData: User[] = [
   {
     id: "1",
     name: "Olivia Rhye",
-    image: "/avatars/olivia.jpg",
+    image: "/images/avatar.png",
     email: "phoenix@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -13,7 +13,7 @@ export const usersData: User[] = [
   {
     id: "2",
     name: "Phoenix Baker",
-    image: "/avatars/phoenix.jpg",
+    image: "/images/avatar.png",
     email: "phoenix@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -22,7 +22,7 @@ export const usersData: User[] = [
   {
     id: "3",
     name: "Candice Wu",
-    image: "/avatars/candice.jpg",
+    image: "/images/avatar.png",
     email: "candice@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -31,7 +31,7 @@ export const usersData: User[] = [
   {
     id: "4",
     name: "Drew Cano",
-    image: "/avatars/drew.jpg",
+    image: "/images/avatar.png",
     email: "drew@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -40,7 +40,7 @@ export const usersData: User[] = [
   {
     id: "5",
     name: "Candice Wu",
-    image: "/avatars/candice.jpg",
+    image: "/images/avatar.png",
     email: "candice@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -49,7 +49,7 @@ export const usersData: User[] = [
    {
     id: "6",
     name: "Orlando Diggs",
-    image: "/avatars/orlando.jpg",
+    image: "/images/avatar.png",
     email: "orlando@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -58,7 +58,7 @@ export const usersData: User[] = [
    {
     id: "7",
     name: "Andi Lane",
-    image: "/avatars/andi.jpg",
+    image: "/images/avatar.png",
     email: "andi@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -67,7 +67,7 @@ export const usersData: User[] = [
    {
     id: "8",
     name: "Kate Morrison",
-    image: "/avatars/kate.jpg",
+    image: "/images/avatar.png",
     email: "kate@untitledui.com",
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
@@ -79,7 +79,7 @@ export const userDetailsData: UserDetails = {
   id: "1",
   name: "Danial Smith",
   email: "danial@gmail.com",
-  image: "/avatars/danial.jpg",
+  image: "/images/avatar.png",
   location: "Tanzania",
   date: "Jan 6, 2025",
   joined: "6 Jan, 2025",
@@ -94,7 +94,7 @@ export const userDetailsData: UserDetails = {
        title: "Mwati Village",
        location: "Tanzania",
        families: 24,
-       image: "/projects/mwati.jpg",
+       image: "/images/avatar.png",
        tags: ["Adopt Prisons/ Villages"]
     },
     {
@@ -102,7 +102,7 @@ export const userDetailsData: UserDetails = {
        title: "Kitui Hills",
        location: "Tanzania",
        families: 24,
-       image: "/projects/kitui.jpg",
+       image: "/images/avatar.png",
        tags: ["Adopt Prisons/ Villages"]
     },
     {
@@ -110,7 +110,7 @@ export const userDetailsData: UserDetails = {
        title: "Kasama Town",
        location: "Tanzania",
        families: 24,
-       image: "/projects/kasama.jpg",
+       image: "/images/avatar.png",
        tags: ["Adopt Prisons/ Villages"]
     },
      {
@@ -118,7 +118,7 @@ export const userDetailsData: UserDetails = {
        title: "Kasama Town",
        location: "Tanzania",
        families: 24,
-       image: "/projects/kasama2.jpg",
+       image: "/images/avatar.png",
        tags: ["Adopt Prisons/ Villages"]
     }
   ]
