@@ -21,7 +21,7 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
   const displayUsers = limit ? filteredUsers.slice(0, limit) : filteredUsers;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-b-xl shadow-none border border-[#FAFAFA] dark:border-gray-700 overflow-hidden">
         {/* Table Header Wrapper used in Home page, but maybe handled outside? Design has "All User" inside the card-like container?
             In Home page, "All User" is a heading above the table interactions. 
             I'll render the table content here.
@@ -30,18 +30,18 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
         <table className="w-full text-sm text-left">
           <thead className="text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/50 uppercase">
             <tr>
-              <th className="px-6 py-4 font-medium">Name</th>
-              <th className="px-6 py-4 font-medium">Email address</th>
-              <th className="px-6 py-4 font-medium">Joining Date</th>
-              <th className="px-6 py-4 font-medium">Location</th>
-              <th className="px-6 py-4 font-medium">User type</th>
-              <th className="px-6 py-4 font-medium">Action</th>
+              <th className="p-5 font-medium">Name</th>
+              <th className="p-5 font-medium">Email address</th>
+              <th className="p-5 font-medium">Joining Date</th>
+              <th className="p-5 font-medium">Location</th>
+              <th className="p-5 font-medium">User type</th>
+              <th className="p-5 font-medium">Action</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
             {displayUsers.map((user, idx) => (
               <tr key={`${user.id}-${idx}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                <td className="px-6 py-4">
+                <td className="p-5">
                   <Link href={`/users/${user.id}`} className="flex items-center gap-3 group">
                    <div className="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
                        {/* Using key as simplified generic avatar seed or similar if no real image */}
@@ -60,7 +60,7 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
                 </td>
                 <td className="px-6 py-4">
                   <button className="text-gray-400 hover:text-red-500 transition-colors">
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4 text-red" />
                   </button>
                 </td>
               </tr>

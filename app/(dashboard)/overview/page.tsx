@@ -23,8 +23,8 @@ export default function OverviewPage() {
       </div>
 
       {/* Recent Users Table */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">All User</h2>
+      <div className="bg-white rounded-xl shadow-xs border border-[#E9EAEB]">
+        <h2 className="text-lg font-semibold text-primary p-5">All User</h2>
         <UsersTable limit={5} />
       </div>
       </div>
