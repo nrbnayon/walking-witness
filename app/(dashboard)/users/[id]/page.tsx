@@ -12,22 +12,22 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="p-4 md:p-8 w-full mx-auto">
        <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Leader details</h1>
+        <h1 className="text-2xl font-bold text-primary dark:text-white">Leader details</h1>
         <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Leader / <span className="text-gray-900 dark:text-white font-medium">Leader details</span>
+            Leader / <span className="text-primary dark:text-white font-medium">Leader details</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Profile Card */}
-        <div className="lg:col-span-1 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8 flex flex-col items-center text-center h-fit">
+        <div className="lg:col-span-1 bg-white dark:bg-gray-800 rounded-sm shadow-none border border-[#E9EAEB] p-8 flex flex-col items-center text-center h-fit">
             <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-200">
                 {/* Fallback avatar */}
                  <div className="w-full h-full bg-slate-800 flex items-center justify-center text-white text-4xl font-bold">
                     DS
                  </div>
             </div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{userData.name}</h2>
+            <h2 className="text-xl font-bold text-primary dark:text-white mb-4">{userData.name}</h2>
             
             <div className="w-full space-y-4 text-left">
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
@@ -50,10 +50,10 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
         </div>
 
         {/* Right Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-3 space-y-6">
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-sm shadow-none border border-[#E9EAEB]  ">
                     <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Total earning</h3>
                     <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{userData.earnings}</div>
                     <div className="flex items-center gap-1 text-xs">
@@ -64,7 +64,7 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
                         <span className="text-gray-400">vs last month</span>
                     </div>
                 </div>
-                 <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                 <div className="bg-white dark:bg-gray-800 p-6 rounded-sm shadow-none border border-[#E9EAEB]  ">
                     <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Total Projects</h3>
                     <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{userData.projectsCount}</div>
                     <div className="flex items-center gap-1 text-xs">
@@ -78,13 +78,13 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
             </div>
 
             {/* Projects List */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
-                <div className="p-6 border-b border-gray-100 dark:border-gray-700">
+            <div className="bg-white dark:bg-gray-800 rounded-sm shadow-none border border-[#E9EAEB] overflow-hidden">
+                <div className="p-6 border-b border-[#E9EAEB]">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Projects</h3>
                 </div>
-                <div className="divide-y divide-gray-100 dark:divide-gray-700">
+                <div className="divide-y divide-[#E9EAEB] dark:divide-gray-700 px-4">
                     {userData.projectList.map((project, idx) => (
-                        <div key={idx} className="p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                        <div key={idx} className="p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center rounded-xl shadow-sm border border-[#E9EAEB] mt-3">
                             <div className="w-24 h-24 sm:w-32 sm:h-24 rounded-lg bg-gray-200 shrink-0 overflow-hidden">
                                  {/* Fallback image */}
                                  <div className="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500 text-xs text-center p-2">
