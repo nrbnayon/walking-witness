@@ -1,11 +1,13 @@
-import React from "react";
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/Dashboard/Shared/Badge";
 import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usersData } from "@/data";
-import { UserType } from "@/types";
+import { UserType, User } from "@/types";
+import { useState } from "react";
+import { DeleteConfirmationModal } from "@/components/Dashboard/Shared/DeleteConfirmationModal";
 
 interface UsersTableProps {
   limit?: number;
@@ -14,9 +16,19 @@ interface UsersTableProps {
 }
 
 export function UsersTable({ limit, filter = "All", showPagination = false }: UsersTableProps) {
+  const [allUsers, setAllUsers] = useState<User[]>(usersData);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
+
   const filteredUsers = filter === "All" 
-    ? usersData 
-    : usersData.filter(u => u.type === filter);
+    ? allUsers 
+    : allUsers.filter(u => u.type === filter);
+  
+  const handleDelete = () => {
+    if (userToDelete) {
+      setAllUsers(prev => prev.filter(u => u.id !== userToDelete.id));
+      setUserToDelete(null);
+    }
+  };
   
   const displayUsers = limit ? filteredUsers.slice(0, limit) : filteredUsers;
 
@@ -43,11 +55,20 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
               <tr key={`${user.id}-${idx}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                 <td className="p-5">
                   <Link href={`/users/${user.id}`} className="flex items-center gap-3 group">
-                   <div className="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
-                       {/* Using key as simplified generic avatar seed or similar if no real image */}
+                   <div className="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden relative">
+                       {user.image ? (
+                           <Image 
+                             src={user.image} 
+                             alt={user.name} 
+                             fill 
+                             sizes="32px"
+                             className="object-cover"
+                           />
+                       ) : (
                         <div className="w-full h-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs">
                             {user.name.charAt(0)}{user.name.split(" ")[1]?.charAt(0)}
                         </div>
+                       )}
                    </div>
                    <span className="font-medium text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">{user.name}</span>
                   </Link>
@@ -59,7 +80,14 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
                   <Badge variant={user.type.toLowerCase() as any}>{user.type}</Badge>
                 </td>
                 <td className="px-6 py-4">
-                  <button className="text-gray-400 hover:text-red-500 transition-colors">
+                  <button 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setUserToDelete(user);
+                    }}
+                    className="text-gray-400 hover:text-red-500 transition-colors cursor-pointer p-2 rounded-sm hover:bg-red-50 dark:hover:bg-red-900"
+                  >
                     <Trash2 className="w-4 h-4 text-red" />
                   </button>
                 </td>
@@ -93,6 +121,13 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
              </button>
         </div>
       )}
+      <DeleteConfirmationModal 
+        isOpen={!!userToDelete}
+        onClose={() => setUserToDelete(null)}
+        onConfirm={handleDelete}
+        title="Delete User"
+        description={`Are you sure you want to delete ${userToDelete?.name}? This action cannot be undone.`}
+      />
     </div>
   );
 }
