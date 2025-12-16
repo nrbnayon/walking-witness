@@ -7,7 +7,6 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
 import {
   LogOut,
   PanelLeftOpen,
@@ -49,7 +48,6 @@ interface DashboardWrapperProps {
 export default function DashboardWrapper({ children }: DashboardWrapperProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { theme } = useTheme();
   const [open, setOpen] = useState(true);
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const [isResizing, setIsResizing] = useState(false);
@@ -293,7 +291,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
           icon={icon}
           strokeWidth={1.5}
           className={cn(
-            "h-6 w-6 flex-shrink-0 transition-colors duration-200",
+            "h-6 w-6 shrink-0 transition-colors duration-200",
             isActive
               ? "text-[#DD655C]"
               : "text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -406,7 +404,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                               : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
                           )}
                         >
-                          <span className="flex-shrink-0">
+                          <span className="shrink-0">
                             {renderIcon(link.icon, isActive)}
                           </span>
                           <motion.span
@@ -414,7 +412,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                               display: open ? "inline-block" : "none",
                               opacity: open ? 1 : 0,
                             }}
-                            className="text-sm whitespace-pre inline-block !p-0 !m-0 flex-1"
+                            className="text-sm whitespace-pre inline-block p-0! m-0! flex-1"
                           >
                             {link.label}
                           </motion.span>
@@ -499,13 +497,13 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                 onClick={handleLogoutClick}
                 className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
               >
-                <LogOut className="h-5 w-5 flex-shrink-0" />
+                <LogOut className="h-5 w-5 shrink-0" />
                 <motion.span
                   animate={{
                     display: open ? "inline-block" : "none",
                     opacity: open ? 1 : 0,
                   }}
-                  className="text-sm whitespace-pre inline-block !p-0 !m-0"
+                  className="text-sm whitespace-pre inline-block p-0! m-0!"
                 >
                   Log Out
                 </motion.span>
@@ -514,7 +512,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
               {/* User Profile */}
               <div className="mt-4 pt-4 border-t border-gray-300">
                 <div className="flex items-center gap-3 px-3">
-                  <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center shrink-0">
                     <span className="text-pink-600 font-semibold text-sm">
                       OR
                     </span>
@@ -561,7 +559,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
         <button
           onClick={handleToggleClick}
           className={cn(
-            "absolute hidden md:flex top-4 z-[60] cursor-pointer p-2 rounded-full bg-white dark:bg-primary-dark border border-gray-300 dark:border-gray-300 shadow-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200",
+            "absolute hidden md:flex top-4 z-60 cursor-pointer p-2 rounded-full bg-white dark:bg-primary-dark border border-gray-300 dark:border-gray-300 shadow-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200",
             open ? "-right-3" : "-right-3"
           )}
         >
@@ -575,7 +573,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
 
       {/* Logout Confirmation Modal */}
       {showLogoutModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center">
+        <div className="fixed inset-0 z-100 flex items-center justify-center">
           <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
             onClick={handleCancelLogout}
