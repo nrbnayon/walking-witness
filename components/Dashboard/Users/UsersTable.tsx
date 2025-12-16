@@ -3,28 +3,64 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/Dashboard/Shared/Badge";
 import { Trash2 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { usersData } from "@/data";
 import { UserType, User } from "@/types";
 import { useState } from "react";
 import { DeleteConfirmationModal } from "@/components/Dashboard/Shared/DeleteConfirmationModal";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Pagination } from "@/components/Dashboard/Shared/Pagination";
+import { useEffect } from "react";
 
 interface UsersTableProps {
   limit?: number;
   filter?: "All" | UserType;
   showPagination?: boolean;
+  searchQuery?: string;
+  isLoading?: boolean;
 }
 
-export function UsersTable({ limit, filter = "All", showPagination = false }: UsersTableProps) {
+export function UsersTable({ 
+  limit, 
+  filter = "All", 
+  showPagination = false,
+  searchQuery = "",
+  isLoading = false
+}: UsersTableProps) {
   const [allUsers, setAllUsers] = useState<User[]>(usersData);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredUsers = filter === "All" 
-    ? allUsers 
-    : allUsers.filter(u => u.type === filter);
+  const filteredUsers = allUsers.filter(u => {
+    // 1. Filter by Type
+    if (filter !== "All" && u.type !== filter) return false;
+
+    // 2. Filter by Search Query
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      return (
+        u.name.toLowerCase().includes(query) ||
+        u.email.toLowerCase().includes(query) ||
+        u.location.toLowerCase().includes(query)
+      );
+    }
+
+    return true;
+  });
+
+  // Reset page when filter or search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filter, searchQuery]);
   
+  const itemsPerPage = limit || 10;
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+  
+  const displayUsers = showPagination 
+    ? filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+    : (limit ? filteredUsers.slice(0, limit) : filteredUsers);
+
   const handleDelete = async () => {
     if (userToDelete) {
       setIsDeleting(true);
@@ -40,14 +76,8 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
     }
   };
   
-  const displayUsers = limit ? filteredUsers.slice(0, limit) : filteredUsers;
-
   return (
     <div className="bg-white dark:bg-gray-800 rounded-b-xl shadow-none border border-[#FAFAFA] dark:border-gray-700 overflow-hidden">
-        {/* Table Header Wrapper used in Home page, but maybe handled outside? Design has "All User" inside the card-like container?
-            In Home page, "All User" is a heading above the table interactions. 
-            I'll render the table content here.
-        */}
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left">
           <thead className="text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/50 uppercase">
@@ -61,7 +91,25 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-            {displayUsers.map((user, idx) => (
+            {isLoading ? (
+               // Loading Skeletons
+               Array.from({ length: 5 }).map((_, idx) => (
+                  <tr key={idx} className="animate-pulse">
+                    <td className="p-5">
+                      <div className="flex items-center gap-3">
+                        <Skeleton className="w-8 h-8 rounded-full" />
+                        <Skeleton className="h-4 w-32" />
+                      </div>
+                    </td>
+                    <td className="px-6 py-4"><Skeleton className="h-4 w-40" /></td>
+                    <td className="px-6 py-4"><Skeleton className="h-4 w-24" /></td>
+                    <td className="px-6 py-4"><Skeleton className="h-4 w-32" /></td>
+                    <td className="px-6 py-4"><Skeleton className="h-6 w-20 rounded-full" /></td>
+                    <td className="px-6 py-4"><Skeleton className="h-8 w-8" /></td>
+                  </tr>
+               ))
+            ) : displayUsers.length > 0 ? (
+              displayUsers.map((user, idx) => (
               <tr key={`${user.id}-${idx}`} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                 <td className="p-5">
                   <Link href={`/users/${user.id}`} className="flex items-center gap-3 group">
@@ -102,34 +150,23 @@ export function UsersTable({ limit, filter = "All", showPagination = false }: Us
                   </button>
                 </td>
               </tr>
-            ))}
+              ))
+            ) : (
+                <tr>
+                    <td colSpan={6} className="p-8 text-center text-gray-500 dark:text-gray-400">
+                        No users found matching "{searchQuery}"
+                    </td>
+                </tr>
+            )}
           </tbody>
         </table>
       </div>
-       {showPagination && (
-        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100 dark:border-gray-700">
-             <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 transition-colors">
-                Previous
-             </button>
-             <div className="hidden sm:flex gap-1">
-                 {[1, 2, 3, "...", 8, 9, 10].map((page, i) => (
-                     <button 
-                        key={i}
-                        className={cn(
-                            "w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors",
-                            page === 1 
-                                ? "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400" 
-                                : "text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-                        )}
-                     >
-                         {page}
-                     </button>
-                 ))}
-             </div>
-              <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 transition-colors">
-                Next
-             </button>
-        </div>
+       {showPagination && totalPages > 1 && (
+        <Pagination 
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       )}
       <DeleteConfirmationModal 
         isOpen={!!userToDelete}
