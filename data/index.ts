@@ -140,7 +140,7 @@ export const monthlyViewsData: DoubleBarDataPoint[] = [
 ];
 
 export const locationStatsData: ChartDataPoint[] = [
-{ name: "United States", value: 52.1, color: "#000000" },
+  { name: "United States", value: 52.1, color: "url(#gradient)" },
   { name: "Canada", value: 22.8, color: "#92BFFF" },
   { name: "Mexico", value: 13.9, color: "#94E9B8" },
   { name: "Other", value: 11.2, color: "#AEC7ED" }, 

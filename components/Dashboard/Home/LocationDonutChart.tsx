@@ -4,21 +4,28 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { locationStatsData } from "@/data";
 
 export function LocationDonutChart() {
-  return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 h-full">
+ return (
+    <div className="bg-gray dark:bg-gray-800 p-6 rounded-md shadow-none border border-gray-100 dark:border-gray-700 h-full">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-6">Total earning by Location</h3>
      
-      <div className="h-[200px] relative">
+      <div className="h-[150px] relative">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#000000" stopOpacity="1" />
+                <stop offset="100%" stopColor="#1C1C1C" stopOpacity="0.6" />
+              </linearGradient>
+            </defs>
             <Pie
               data={locationStatsData}
               cx="50%"
               cy="50%"
-              innerRadius={60}
-              outerRadius={90}
+              innerRadius={40}
+              outerRadius={70}
               paddingAngle={2}
-              startAngle={0}
+              startAngle={-90}
+              cornerRadius={4}
               endAngle={360}
               dataKey="value"
               stroke="none"
@@ -33,10 +40,17 @@ export function LocationDonutChart() {
       </div>
 
       <div className="mt-6 space-y-3">
-        {locationStatsData.map((item) => (
+        {locationStatsData.map((item, index) => (
           <div key={item.name} className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+              <div 
+                className="w-3 h-3 rounded-full" 
+                style={{ 
+                  background: index === 0 
+                    ? 'linear-gradient(180deg, #000000 0%, #1C1C1C 100%)' 
+                    : item.color 
+                }} 
+              />
               <span className="text-gray-600 dark:text-gray-300">{item.name}</span>
             </div>
             <span className="font-medium text-gray-900 dark:text-gray-100">{item.value}%</span>
