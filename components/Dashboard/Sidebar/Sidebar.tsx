@@ -27,11 +27,11 @@ import type { IconSvgElement } from "@hugeicons/react";
 import {
   Home07Icon,
   UserGroupIcon,
-  ShoppingBasket01Icon,
-  Money02Icon,
-  UserStar01Icon,
+  ManagerIcon,
   CloudUploadIcon,
   ShieldUserIcon,
+  ShoppingBasket03Icon,
+  Briefcase01Icon,
 } from "@hugeicons/core-free-icons";
 import Link from "next/link";
 
@@ -67,7 +67,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const previousSearchQueryRef = useRef<string>("");
 
-  const minWidth = 72;
+  const minWidth = 80;
   const maxWidth = 400;
 
   // Memoize links array matching the design
@@ -90,17 +90,17 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
       {
         label: "Donations",
         href: "/donations",
-        icon: ShoppingBasket01Icon,
+        icon: ShoppingBasket03Icon,
       },
       {
         label: "Project",
         href: "/project",
-        icon: Money02Icon,
+        icon: Briefcase01Icon,
       },
       {
         label: "Leader request",
         href: "/leader-request",
-        icon: UserStar01Icon,
+        icon: ManagerIcon,
       },
       {
         label: "Upload",
@@ -365,7 +365,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
         >
           <SidebarBody
             className={cn(
-              "justify-between gap-10 border-r border-gray-300",
+              "justify-between gap-10 border-r border-[#E7EAED]",
               "bg-background text-foreground",
               "dark:bg-primary-dark dark:bg-dark"
             )}
@@ -445,7 +445,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                         <Link
                           href={link.href}
                           className={cn(
-                            "flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 group flex-1 relative",
+                            "flex items-center gap-3 p-3 rounded-md transition-all duration-200 group flex-1 relative",
                             isActive
                               ? "bg-[#FBECEB] text-[#DD655C] font-medium"
                               : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
@@ -539,25 +539,9 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
             </div>
 
             {/* Bottom Section */}
-            <div className="border-t border-gray-300 pt-4">
-              <button
-                onClick={handleLogoutClick}
-                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
-              >
-                <LogOut className="h-5 w-5 shrink-0" />
-                <motion.span
-                  animate={{
-                    display: open ? "inline-block" : "none",
-                    opacity: open ? 1 : 0,
-                  }}
-                  className="text-sm whitespace-pre inline-block p-0! m-0!"
-                >
-                  Log Out
-                </motion.span>
-              </button>
-
+            <div>
               {/* User Profile */}
-              <div className="mt-4 pt-4 border-t border-gray-300">
+              <div className="mt-4 pt-4 border-t border-[#E7EAED]">
                 <div className="flex items-center gap-3 px-3">
                   <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center shrink-0">
                     <span className="text-pink-600 font-semibold text-sm">
@@ -578,7 +562,8 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                       Super Admin
                     </p>
                   </motion.div>
-                  <motion.button
+                  <motion.button 
+                    onClick={handleLogoutClick}
                     animate={{
                       display: open ? "block" : "none",
                       opacity: open ? 1 : 0,
@@ -663,7 +648,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                 </button>
                 <button
                   onClick={handleConfirmLogout}
-                  className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors duration-200"
+                  className="px-4 py-2 text-sm font-medium text-white bg-gradient-red rounded-lg transition-colors duration-200"
                 >
                   Logout
                 </button>
@@ -692,7 +677,7 @@ const Logo = ({ open }: { open: boolean }) => {
         <Image
           className="w-full h-full object-contain"
           alt="Walking Witness Logo"
-          src="/logo.png"
+          src="/icons/logo.svg"
           width={open ? 120 : 40}
           height={open ? 120 : 40}
           priority

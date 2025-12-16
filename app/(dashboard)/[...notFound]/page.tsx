@@ -60,19 +60,19 @@ export default function DashboardNotFound() {
           <Image
             src="/images/404.jpg"
             alt="Under Development"
-            width={400}
-            height={400}
-            className="rounded-2xl shadow-2xl"
+            width={600}
+            height={600}
+            className="rounded-2xl"
             priority
           />
         </motion.div>
 
         {/* Content Section */}
-        <div className="text-center space-y-2 mb-4">
+        <div className="text-center space-y-4 mb-4">
           {/* Title */}
           <motion.h1
             variants={itemVariants}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight"
+            className="text-2xl md:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight"
           >
             {lastSegment
               ? `${lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)}`
@@ -83,19 +83,19 @@ export default function DashboardNotFound() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-gray-600 max-w-md mx-auto"
+            className="text-base md:text-lg text-secondary max-w-md mx-auto"
           >
             We&apos;re working hard to bring this feature to life
           </motion.p>
 
           {/* Path Display */}
-          <motion.div variants={itemVariants} className="inline-block mt-4">
+          {/* <motion.div variants={itemVariants} className="inline-block mt-4">
             <div className="px-5 py-2.5 bg-gray-50 rounded-xl border border-gray-200">
               <code className="text-sm text-gray-700 font-mono">
                 {pathname}
               </code>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
 
         {/* Buttons */}
@@ -103,16 +103,6 @@ export default function DashboardNotFound() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-4"
         >
-          <Button
-            asChild
-            size="lg"
-            className="bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            <Link href="/dashboard" className="flex items-center gap-2">
-              <Home className="w-4 h-4" />
-              Go to Dashboard
-            </Link>
-          </Button>
 
           <Button
             asChild
@@ -126,6 +116,17 @@ export default function DashboardNotFound() {
             >
               <ArrowLeft className="w-4 h-4" />
               Go Back
+            </Link>
+          </Button>
+
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary! hover:bg-primary/80! text-white shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            <Link href="/dashboard" className="flex items-center gap-2">
+              <Home className="w-4 h-4" />
+              Go to Dashboard
             </Link>
           </Button>
         </motion.div>
