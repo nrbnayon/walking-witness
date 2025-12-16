@@ -149,6 +149,10 @@
     background: linear-gradient(180deg, #e04f43 0%, #aa1b10 98.96%);
   }
 
+  .bg-gray {
+    background: #F9F9FA;
+  }
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
