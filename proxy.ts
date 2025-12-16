@@ -20,17 +20,10 @@ const PUBLIC_ROUTES = [
 ];
 
 // Protected routes (authentication required)
-const PROTECTED_ROUTES = [
-  "/dashboard",
-  "/profile",
-  "/settings",
-  "/admin",
-];
+const PROTECTED_ROUTES = ["/dashboard", "/profile", "/settings", "/admin"];
 
 // Admin-only routes (requires admin role)
-const ADMIN_ROUTES = [
-  "/admin",
-];
+const ADMIN_ROUTES = ["/admin"];
 
 // JWT Secret - Use environment variable in production
 const JWT_SECRET = new TextEncoder().encode(
@@ -58,7 +51,7 @@ async function verifyToken(token: string): Promise<JWTPayload | null> {
  * Check if a path matches any route in the list
  */
 function matchesRoute(pathname: string, routes: string[]): boolean {
-  return routes.some(route => {
+  return routes.some((route) => {
     // Exact match
     if (pathname === route) return true;
     // Prefix match (e.g., /dashboard matches /dashboard/*)
@@ -66,7 +59,6 @@ function matchesRoute(pathname: string, routes: string[]): boolean {
     return false;
   });
 }
-
 
 // ============================================
 // MAIN PROXY FUNCTION (Next.js v16)
@@ -98,14 +90,25 @@ export async function proxy(request: NextRequest) {
   // ============================================
   let user = null;
   let isAuthenticated = false;
+  const isDevelopment = process.env.NODE_ENV !== "production";
 
   if (accessToken) {
-    user = await verifyToken(accessToken);
-    isAuthenticated = !!user;
+    // Development mode: Accept dummy credentials
+    if (isDevelopment && accessToken === "dev-admin-token") {
+      user = { email: "admin@gmail.com", role: "admin" };
+      isAuthenticated = true;
+      if (!userRole) {
+        userRole = "admin";
+      }
+    } else {
+      // Production mode: Verify JWT token
+      user = await verifyToken(accessToken);
+      isAuthenticated = !!user;
 
-    // Extract role from token payload (if not in cookie)
-    if (user && !userRole) {
-      userRole = (user.role as string) || (user.userRole as string);
+      // Extract role from token payload (if not in cookie)
+      if (user && !userRole) {
+        userRole = (user.role as string) || (user.userRole as string);
+      }
     }
   }
 
@@ -131,7 +134,7 @@ export async function proxy(request: NextRequest) {
     if (isAuthenticated && (pathname === "/login" || pathname === "/signup")) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
-    
+
     const response = NextResponse.next();
     // Add security headers
     response.headers.set("X-Frame-Options", "DENY");

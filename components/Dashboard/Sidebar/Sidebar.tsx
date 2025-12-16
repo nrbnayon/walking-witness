@@ -1,7 +1,13 @@
 // components/Sidebar.tsx
 "use client";
 
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import { Sidebar, SidebarBody } from "@/components/ui/sidebar";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -59,6 +65,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const previousSearchQueryRef = useRef<string>("");
 
   const minWidth = 72;
   const maxWidth = 400;
@@ -131,10 +138,10 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
     (link: LinkType) => {
       // Exact match
       if (pathname === link.href) return true;
-      
+
       // Check if pathname starts with link.href (for dynamic routes like /users/123)
       if (pathname.startsWith(link.href + "/")) return true;
-      
+
       // Check sublinks
       if (link.subLinks) {
         return link.subLinks.some((subLink) => {
@@ -145,7 +152,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
           return false;
         });
       }
-      
+
       return false;
     },
     [pathname]
@@ -165,8 +172,9 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
     links.forEach((link) => {
       if (
         link.subLinks &&
-        link.subLinks.some((subLink) => 
-          pathname === subLink.href || pathname.startsWith(subLink.href + "/")
+        link.subLinks.some(
+          (subLink) =>
+            pathname === subLink.href || pathname.startsWith(subLink.href + "/")
         )
       ) {
         if (!expandedItems.includes(link.label)) {
@@ -178,7 +186,9 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
 
   // Auto-expand items when search matches sublinks
   useEffect(() => {
-    if (searchQuery.trim()) {
+    // Only process if search query actually changed
+    if (searchQuery.trim() && searchQuery !== previousSearchQueryRef.current) {
+      previousSearchQueryRef.current = searchQuery;
       const itemsToExpand: string[] = [];
       links.forEach((link) => {
         if (link.subLinks) {
@@ -190,9 +200,26 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
           }
         }
       });
-      setExpandedItems((prev) => [...new Set([...prev, ...itemsToExpand])]);
+      // Only update if there are new items to expand
+      if (itemsToExpand.length > 0) {
+        setExpandedItems((prev) => {
+          const newSet = new Set([...prev, ...itemsToExpand]);
+          const newArray = Array.from(newSet);
+          // Only update if the array actually changed
+          if (
+            newArray.length === prev.length &&
+            newArray.every((item, idx) => item === prev[idx])
+          ) {
+            return prev;
+          }
+          return newArray;
+        });
+      }
+    } else if (!searchQuery.trim()) {
+      previousSearchQueryRef.current = "";
     }
-  }, [searchQuery, links]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsResizing(true);
@@ -239,21 +266,41 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
     };
   }, [isResizing, startX, startWidth]);
 
+  // Handle width update after resizing completes
   useEffect(() => {
     if (!isResizing && manualToggle) {
-      if (open) {
+      // Defer state update to avoid synchronous setState in effect
+      // This is necessary to wait for resizing to complete before updating width
+      const timeoutId = setTimeout(() => {
+        if (open) {
+          setSidebarWidth(220);
+          setUserResizedWidth(220);
+        } else {
+          setSidebarWidth(minWidth);
+        }
+        setManualToggle(false);
+      }, 0);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [open, isResizing, manualToggle, minWidth]);
+
+  const handleToggleClick = () => {
+    // If not resizing, update width immediately
+    if (!isResizing) {
+      const newOpen = !open;
+      if (newOpen) {
         setSidebarWidth(220);
         setUserResizedWidth(220);
       } else {
         setSidebarWidth(minWidth);
       }
-      setManualToggle(false);
+      setOpen(newOpen);
+    } else {
+      // If resizing, use the effect to handle it after resizing completes
+      setManualToggle(true);
+      setOpen(!open);
     }
-  }, [open, isResizing, manualToggle, minWidth]);
-
-  const handleToggleClick = () => {
-    setManualToggle(true);
-    setOpen(!open);
   };
 
   // Handle logout functionality
@@ -263,18 +310,21 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
 
   const handleConfirmLogout = () => {
     // Clear cookies
-    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    
+    document.cookie =
+      "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
     // Clear localStorage (for security)
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("userRole");
-    
+
     console.log("User logged out successfully");
     setShowLogoutModal(false);
-    
+
     // Redirect to login
     router.push("/login");
   };
@@ -284,23 +334,20 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
   };
 
   // Render icon with proper styling
-  const renderIcon = useCallback(
-    (icon: IconSvgElement, isActive: boolean) => {
-      return (
-        <HugeiconsIcon
-          icon={icon}
-          strokeWidth={1.5}
-          className={cn(
-            "h-6 w-6 shrink-0 transition-colors duration-200",
-            isActive
-              ? "text-[#DD655C]"
-              : "text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-          )}
-        />
-      );
-    },
-    []
-  );
+  const renderIcon = useCallback((icon: IconSvgElement, isActive: boolean) => {
+    return (
+      <HugeiconsIcon
+        icon={icon}
+        strokeWidth={1.5}
+        className={cn(
+          "h-6 w-6 shrink-0 transition-colors duration-200",
+          isActive
+            ? "text-[#DD655C]"
+            : "text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+        )}
+      />
+    );
+  }, []);
 
   return (
     <div
@@ -462,10 +509,10 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                           }}
                         >
                           {filteredSubLinks.map((subLink, subIdx) => {
-                            const isSubLinkActive = 
-                              pathname === subLink.href || 
+                            const isSubLinkActive =
+                              pathname === subLink.href ||
                               pathname.startsWith(subLink.href + "/");
-                            
+
                             return (
                               <Link
                                 key={subIdx}
@@ -603,8 +650,8 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
               </h3>
 
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                Are you sure you want to log out? You will need to sign in
-                again to access your account.
+                Are you sure you want to log out? You will need to sign in again
+                to access your account.
               </p>
 
               <div className="flex gap-3 justify-center">
