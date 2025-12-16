@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Mail, Loader2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -70,35 +70,34 @@ export default function ForgetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col-reverse lg:flex-row bg-white dark:bg-primary-dark">
-      <div className="flex-1 bg-[#EAF3FF] dark:bg-primary-dark flex items-center justify-center p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
-        <Card className="w-full max-w-sm sm:max-w-md lg:max-w-2xl p-4 sm:p-6 lg:p-10 rounded-2xl sm:rounded-3xl lg:rounded-4xl border border-gray-200 dark:border-gray-700 shadow-sm bg-white dark:bg-gray-800">
-          <CardHeader className="text-center pb-4 sm:pb-6 relative">
+    <div className="min-h-screen flex flex-col-reverse lg:flex-row bg-primary dark:bg-primary-dark">
+      <div className="flex-1 bg-primary dark:bg-primary-dark flex items-center justify-center p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
+        <div className="w-full max-w-sm sm:max-w-md lg:max-w-xl p-4 py-6 rounded-sm sm:rounded-xl border-none shadow-none bg-white">
+          <div className="text-center relative mb-2">
             <div className="flex items-center justify-center mb-2 sm:mb-4">
               <Link
                 href="/login"
-                className="absolute left-0 top-0 sm:left-2 sm:top-2 lg:left-4 lg:top-4 p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+                className="absolute left-0 top-0 sm:left-2 sm:top-2 lg:left-4 lg:top-4 p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors border"
               >
                 <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-400" />
               </Link>
               <div className="w-full flex justify-center items-center">
                 <Image
-                  src="/logo.png"
+                  src="/icons/logo.svg"
                   alt="logo"
-                  width={120}
+                  width={165}
                   height={120}
-                  className="w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
                 />
               </div>
             </div>
             <h2 className="text-lg sm:text-xl md:text-3xl text-gray-900 font-bold dark:text-white my-3">
               Reset Password
             </h2>
-            <p className="text-muted-foreground text-base px-2 sm:px-0">
+            <p className="text-secondary text-base px-2 sm:px-0">
               Enter your email address and we&lsquo;ll send you a verification
               code
             </p>
-          </CardHeader>
+          </div>
 
           <CardContent className="px-2 sm:px-4 lg:px-6">
             <form
@@ -118,7 +117,7 @@ export default function ForgetPassword() {
                     id="email"
                     type="email"
                     placeholder="Enter your email address"
-                    className={`pl-4 pr-10 h-10 sm:h-12 border-primary/30 bg-input text-foreground focus-visible:border-primary/50 placeholder:text-muted-foreground rounded-md text-sm sm:text-base ${
+                    className={`pl-4 pr-10 h-10 sm:h-12 rounded-md shadow-none text-foreground placeholder:text-muted-foreground text-sm sm:text-base ${
                       errors.email
                         ? "border-error focus:border-error"
                         : "input-focus"
@@ -138,7 +137,7 @@ export default function ForgetPassword() {
               {/* Send OTP Button */}
               <Button
                 type="submit"
-                className="w-full h-10 sm:h-12 bg-primary/80 hover:bg-primary text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-indigo-500/20 text-sm sm:text-base"
+                className="w-full h-10 sm:h-12 bg-gradient-red hover:bg-gradient-red-hover text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-indigo-500/20 text-sm sm:text-base"
                 disabled={isLoading || isSubmitting}
               >
                 {isLoading ? (
@@ -158,7 +157,7 @@ export default function ForgetPassword() {
               </Button>
             </form>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </div>
   );

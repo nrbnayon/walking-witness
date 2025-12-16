@@ -21,16 +21,10 @@ export default function Home() {
         </p>
         <div className="flex justify-center space-x-4">
           <Link
-            href="/sign-up"
+            href="/login"
             className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
           >
-            Sign Up
-          </Link>
-          <Link
-            href="/sign-in"
-            className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-300"
-          >
-            Sign In
+            Sign in
           </Link>
         </div>
       </div>

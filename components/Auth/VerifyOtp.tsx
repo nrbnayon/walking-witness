@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import {
   InputOTP,
   InputOTPGroup,
@@ -195,25 +195,24 @@ export default function VerifyOtp() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col-reverse lg:flex-row bg-white dark:bg-primary-dark">
+    <div className="min-h-screen flex flex-col-reverse lg:flex-row bg-primary dark:bg-primary-dark">
       {/*  OTP Verification Form */}
-      <div className="flex-1 bg-[#EAF3FF] dark:bg-primary-dark flex items-center justify-center p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
-        <Card className="w-full max-w-sm sm:max-w-md lg:max-w-2xl p-4 sm:p-6 lg:p-10 rounded-2xl sm:rounded-3xl lg:rounded-4xl border border-gray-200 dark:border-gray-700 shadow-sm bg-white dark:bg-gray-800">
-          <CardHeader className="text-center pb-4 sm:pb-6 relative">
+      <div className="flex-1 bg-primary dark:bg-primary-dark flex items-center justify-center p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
+       <div className="w-full max-w-sm sm:max-w-md lg:max-w-xl p-4 py-6 rounded-sm sm:rounded-xl border-none shadow-none bg-white">
+          <div className="text-center relative mb-4">
             <div className="flex items-center justify-center mb-2 sm:mb-4">
               <Link
                 href="/forgot-password"
-                className="absolute left-0 top-0 sm:left-2 sm:top-2 lg:left-4 lg:top-4 p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+               className="absolute left-0 top-0 sm:left-2 sm:top-2 lg:left-4 lg:top-4 p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors border"
               >
                 <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-400" />
               </Link>
               <div className="w-full flex justify-center items-center">
                 <Image
-                  src="/logo.png"
+                  src="/icons/logo.svg"
                   alt="logo"
-                  width={125}
-                  height={125}
-                  className="w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
+                  width={165}
+                  height={120}
                 />
               </div>
             </div>
@@ -226,7 +225,7 @@ export default function VerifyOtp() {
             <p className="text-indigo-600 dark:text-indigo-400 break-all">
               {email}
             </p>
-          </CardHeader>
+          </div>
 
           <CardContent className="px-2 sm:px-4 lg:px-6">
             <form
@@ -242,22 +241,22 @@ export default function VerifyOtp() {
                     onChange={handleOtpChange}
                     disabled={isLoading || timeLeft === 0}
                   >
-                    <InputOTPGroup className="gap-2 sm:gap-4">
+                    <InputOTPGroup className="gap-2 sm:gap-6">
                       <InputOTPSlot
                         index={0}
-                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg border-primary/20 bg-input text-foreground"
+                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg rounded-md shadow-none text-foreground"
                       />
                       <InputOTPSlot
                         index={1}
-                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg rounded-md border-primary/20 bg-input text-foreground"
+                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg rounded-md shadow-none text-foreground"
                       />
                       <InputOTPSlot
                         index={2}
-                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg rounded-md border-primary/20 bg-input text-foreground"
+                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg rounded-md shadow-none text-foreground"
                       />
                       <InputOTPSlot
                         index={3}
-                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg border-primary/20 bg-input text-foreground"
+                        className="w-10 h-10 sm:w-12 sm:h-12 text-base sm:text-lg rounded-md shadow-none text-foreground"
                       />
                     </InputOTPGroup>
                   </InputOTP>
@@ -288,7 +287,7 @@ export default function VerifyOtp() {
               {/* Verify Button */}
               <Button
                 type="submit"
-                className="w-full h-10 sm:h-12 bg-primary/80 hover:bg-primary text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-indigo-500/20 text-sm sm:text-base"
+                className="w-full h-10 sm:h-12 bg-gradient-red hover:bg-gradient-red-hover text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-indigo-500/20 text-sm sm:text-base"
                 disabled={
                   isLoading ||
                   isSubmitting ||
@@ -311,16 +310,13 @@ export default function VerifyOtp() {
               </Button>
 
               {/* Resend Button */}
-              <div className="text-center space-y-2 sm:space-y-3">
-                <p className="text-muted-foreground text-xs sm:text-sm">
+              <div className="flex items-center justify-center gap-2">
+                <p className="text-secondary text-xs sm:text-sm text-center">
                   Didn&lsquo;t receive the code?
                 </p>
-                <Button
-                  type="button"
-                  variant="outline"
+                <button
                   onClick={handleResendOtp}
-                  disabled={timeLeft > 0 || isResending}
-                  className="bg-white/10 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 h-10 sm:h-12 text-sm sm:text-base"
+                  className="text-red text-xs sm:text-sm hover:text-red hover:underline transition-colors text-center sm:text-right cursor-pointer"
                 >
                   {isResending ? (
                     <>
@@ -330,15 +326,15 @@ export default function VerifyOtp() {
                     </>
                   ) : (
                     <>
-                      <span className="hidden sm:inline">Resend Code</span>
+                      <span className="hidden sm:inline">Resend Code</span> 
                       <span className="sm:hidden">Resend</span>
                     </>
                   )}
-                </Button>
+                </button>
               </div>
             </form>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </div>
   );

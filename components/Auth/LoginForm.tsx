@@ -7,7 +7,7 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardHeader } from "@/components/ui/card";
 import {  Eye, EyeOff, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -72,33 +72,33 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col-reverse lg:flex-row bg-white dark:bg-primary-dark">
+    <div className="min-h-screen flex flex-col-reverse lg:flex-row bg-primary dark:bg-primary-dark">
       {/* Right Side - Login Form */}
-      <div className="flex-1 bg-[#EAF3FF] dark:bg-primary-dark flex items-center justify-center p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
-        <Card className="w-full max-w-sm sm:max-w-md lg:max-w-2xl p-4 sm:p-6 lg:p-10 rounded-2xl sm:rounded-3xl lg:rounded-4xl border border-gray-200 dark:border-gray-700 shadow-sm bg-white dark:bg-gray-800">
+      <div className="flex-1 bg-primary dark:bg-primary-dark flex items-center justify-center p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
+        <div className="w-full max-w-sm sm:max-w-md lg:max-w-xl p-4 sm:p-8 rounded-2xl sm:rounded-3xl lg:rounded-4xl border-none shadow-none bg-white dark:bg-gray-800">
           <div className="w-full flex justify-center items-center">
             <Image
-              src="/logo.png"
+              src="/icons/logo.svg"
               alt="logo"
               width={120}
               height={120}
               className="w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
             />
           </div>
-          <CardHeader className="text-center pt-4 md:pt-6">
-            <h2 className="text-lg sm:text-2xl text-gray-900 dark:text-white mb-2">
+          <CardHeader className="text-center">
+            <h2 className="text-lg sm:text-2xl text-gray-900 dark:text-white">
               Welcome Back!
             </h2>
           </CardHeader>
-          <CardHeader className="text-center pb-2">
-            <h2 className="text-lg text-gray-900 dark:text-white mb-2">
+          <CardHeader className="text-center my-2">
+            <h2 className="text-lg text-secondary">
               Enter your email and password to access your account.
             </h2>
           </CardHeader>
 
-          <CardContent className="px-2 sm:px-4 lg:px-6">
+          <div className="px-2 sm:px-4 lg:px-6">
             <form
-              className="space-y-4 sm:space-y-6"
+              className="space-y-4 sm:space-y-3"
               onSubmit={handleSubmit(onSubmit)}
             >
               {/* Email Field */}
@@ -114,7 +114,7 @@ export default function LoginForm() {
                     id="email"
                     type="text"
                     placeholder="Enter your email"
-                    className={`pl-4 pr-10 h-10 sm:h-12 border-primary/30 bg-input focus-visible:border-primary/50 rounded-md text-foreground placeholder:text-muted-foreground text-sm sm:text-base ${
+                    className={`pl-4 pr-10 h-10 sm:h-12 rounded-md shadow-none text-foreground placeholder:text-muted-foreground text-sm sm:text-base ${
                       errors.email
                         ? "border-error focus:border-error"
                         : "input-focus"
@@ -144,8 +144,8 @@ export default function LoginForm() {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-                    className={`pl-4 pr-10 h-10 sm:h-12 border-primary/30 bg-input text-foreground focus-visible:border-primary/50 placeholder:text-muted-foreground rounded-md text-sm sm:text-base ${
-                      errors.password
+                    className={`pl-4 pr-10 h-10 sm:h-12 rounded-md shadow-none text-foreground placeholder:text-muted-foreground text-sm sm:text-base ${
+                      errors.password 
                         ? "border-error focus:border-error"
                         : "input-focus"
                     }`}
@@ -177,7 +177,7 @@ export default function LoginForm() {
                 <div className="flex items-center space-x-2"></div>
                 <Link
                   href="/forgot-password"
-                  className="text-primary/80 font-semibold text-xs sm:text-sm hover:text-primary hover:underline transition-colors text-center sm:text-right"
+                  className="text-red font-semibold text-xs sm:text-sm hover:text-red hover:underline transition-colors text-center sm:text-right"
                 >
                   Forgot Password?
                 </Link>
@@ -186,7 +186,7 @@ export default function LoginForm() {
               {/* Login Button */}
               <Button
                 type="submit"
-                className="w-full h-10 sm:h-12 bg-secondary hover:bg-primary text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-indigo-500/20 text-sm sm:text-base"
+                className="w-full h-10 sm:h-12 bg-gradient-red hover:bg-gradient-red-hover text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-indigo-500/20 text-sm sm:text-base"
                 disabled={isLoading || isSubmitting}
               >
                 {isLoading ? (
@@ -199,8 +199,8 @@ export default function LoginForm() {
                 )}
               </Button>
             </form>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

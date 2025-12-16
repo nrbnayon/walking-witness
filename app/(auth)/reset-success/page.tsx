@@ -11,7 +11,7 @@ export default function CongratulationsPage() {
         <div className="mb-8 flex justify-center">
           <div className="relative">
             {/* Glow effect background */}
-            <div className="absolute inset-0 w-32 h-32 bg-gradient-to-br from-blue-100/50 to-purple-100/30 rounded-full shadow-2xl shadow-cyan-500 backdrop-blur-3xl blur-xl"></div>
+            <div className="absolute inset-0 w-32 h-32 bg-linear-to-br from-blue-100/50 to-purple-100/30 rounded-full shadow-2xl shadow-cyan-500 backdrop-blur-3xl blur-xl"></div>
             {/* Outer light circle with enhanced shadow */}
             <div className="relative w-48 h-48 bg-white/80 rounded-full shadow-2xl shadow-gray-300/60 flex items-center justify-center">
               {/* Inner dark circle with checkmark */}

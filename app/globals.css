@@ -123,3 +123,42 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ===== Utilities Layer ===== */
+@layer utilities {
+  .bg-primary {
+    background: #fbeceb;
+  }
+
+  .text-red {
+    color: #d53f33;
+  }
+  .text-secondary {
+    color: #747086;
+  }
+
+  .bg-primary-dark {
+    background: #1a1a1a;
+  }
+
+  .bg-gradient-red {
+    background: linear-gradient(180deg, #d53f33 0%, #990b00 98.96%);
+  }
+
+  .hover\:bg-gradient-red-hover:hover {
+    background: linear-gradient(180deg, #e04f43 0%, #aa1b10 98.96%);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
