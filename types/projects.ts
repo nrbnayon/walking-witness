@@ -1,4 +1,5 @@
-// types\projects.ts
+export type ProjectStatus = 'Pending' | 'Approved' | 'Declined';
+
 export interface Project {
   id: string;
   projectName: string;
@@ -6,12 +7,11 @@ export interface Project {
   location: string;
   leader: string;
   amount: string;
+  status: ProjectStatus;
 }
 
-export interface ProjectDetail {
-  id: string;
+export interface ProjectDetail extends Project {
   village: string;
-  location: string;
   pastor: string;
   sponsor: string;
   established: string;
