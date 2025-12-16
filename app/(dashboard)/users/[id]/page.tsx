@@ -2,6 +2,7 @@
 
 import  { use } from "react";
 import { Mail, MapPin, Calendar, Users, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import Image from "next/image";
 import { userDetailsData } from "@/data";
 
 export default function UserDetailsPage({ params }: { params: Promise<{ id: string }> }) {
@@ -21,29 +22,31 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Profile Card */}
         <div className="lg:col-span-1 bg-white dark:bg-gray-800 rounded-sm shadow-none border border-[#E9EAEB] p-8 flex flex-col items-center text-center h-fit">
-            <div className="w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-200">
-                {/* Fallback avatar */}
-                 <div className="w-full h-full bg-slate-800 flex items-center justify-center text-white text-4xl font-bold">
-                    DS
-                 </div>
+            <div className="relative w-32 h-32 rounded-full overflow-hidden mb-6 bg-gray-200">
+                <Image
+                    src={userData.image || "/images/avatar.png"}
+                    alt={userData.name}
+                    fill
+                    className="object-cover"
+                />
             </div>
             <h2 className="text-xl font-bold text-primary dark:text-white mb-4">{userData.name}</h2>
             
             <div className="w-full space-y-4 text-left">
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                    <Mail className="w-5 h-5 text-gray-400" />
+                    <Mail className="w-5 h-5 text-gray-700 text-semibold" />
                     <span>{userData.email}</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                    <MapPin className="w-5 h-5 text-gray-400" />
+                    <MapPin className="w-5 h-5 text-gray-700 text-semibold" />
                     <span>{userData.location}</span>
                 </div>
                  <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                    <Users className="w-5 h-5 text-gray-400" />
-                    <span>{userData.joined}</span>
+                    <Users className="w-5 h-5 text-gray-700 text-semibold" />
+                    <span>{userData.date}</span>
                 </div>
                  <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                    <Calendar className="w-5 h-5 text-gray-400" />
+                    <Calendar className="w-5 h-5 text-gray-700 text-semibold" />
                     <span>{userData.joined}</span>
                 </div>
             </div>
@@ -84,22 +87,24 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
                 </div>
                 <div className="divide-y divide-[#E9EAEB] dark:divide-gray-700 px-4">
                     {userData.projectList.map((project, idx) => (
-                        <div key={idx} className="p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center rounded-xl shadow-sm border border-[#E9EAEB] mt-3">
-                            <div className="w-24 h-24 sm:w-32 sm:h-24 rounded-lg bg-gray-200 shrink-0 overflow-hidden">
-                                 {/* Fallback image */}
-                                 <div className="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500 text-xs text-center p-2">
-                                     Project Image
-                                 </div>
+                        <div key={idx} className="p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center rounded-xl shadow-sm border border-[#E9EAEB] mt-3 last:mb-3">
+                            <div className="relative w-24 h-24 sm:w-32 sm:h-24 rounded-lg bg-gray-200 shrink-0 overflow-hidden">
+                                <Image
+                                    src={project.image || "/images/avatar.png"}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                             <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{project.title}</h4>
+                                <h4 className="font-semibold text-gray-900 dark:text-white">{project.title}</h4>
                                 <div className="text-sm text-gray-500 dark:text-gray-400 space-y-1 mb-3">
                                     <div className="flex items-center gap-2">
-                                        <MapPin className="w-3 h-3" />
+                                        <MapPin className="w-3 h-3  text-gray-700 font-bold" />
                                         {project.location}
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <Users className="w-3 h-3" />
+                                        <Users className="w-3 h-3 text-gray-700 font-bold" />
                                         {project.families} families
                                     </div>
                                 </div>

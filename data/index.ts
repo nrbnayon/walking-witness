@@ -94,7 +94,7 @@ export const userDetailsData: UserDetails = {
        title: "Mwati Village",
        location: "Tanzania",
        families: 24,
-       image: "/images/avatar.png",
+       image: "/images/project.png",
        tags: ["Adopt Prisons/ Villages"]
     },
     {
@@ -102,7 +102,7 @@ export const userDetailsData: UserDetails = {
        title: "Kitui Hills",
        location: "Tanzania",
        families: 24,
-       image: "/images/avatar.png",
+       image: "/images/project.png",
        tags: ["Adopt Prisons/ Villages"]
     },
     {
@@ -110,7 +110,7 @@ export const userDetailsData: UserDetails = {
        title: "Kasama Town",
        location: "Tanzania",
        families: 24,
-       image: "/images/avatar.png",
+       image: "/images/project.png",
        tags: ["Adopt Prisons/ Villages"]
     },
      {
@@ -118,7 +118,7 @@ export const userDetailsData: UserDetails = {
        title: "Kasama Town",
        location: "Tanzania",
        families: 24,
-       image: "/images/avatar.png",
+       image: "/images/project.png",
        tags: ["Adopt Prisons/ Villages"]
     }
   ]
