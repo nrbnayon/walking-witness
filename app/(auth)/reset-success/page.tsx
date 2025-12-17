@@ -1,5 +1,5 @@
 import React from "react";
-import {  ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -31,12 +31,10 @@ export default function CongratulationsPage() {
         </div>
 
         {/* Congratulation Text */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">
-          Congratulation
-        </h1>
+        <h1 className="text-4xl font-bold text-primary mb-6">Congratulation</h1>
 
         {/* Description Text */}
-        <p className="text-gray-500 text-base leading-relaxed mb-8 px-4">
+        <p className="text-secondary text-base leading-relaxed mb-8 px-4">
           Your details have been successfully reset your password.
         </p>
 

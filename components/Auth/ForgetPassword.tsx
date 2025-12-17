@@ -79,7 +79,7 @@ export default function ForgetPassword() {
                 href="/login"
                 className="absolute left-0 top-0 sm:left-2 sm:top-2 lg:left-4 lg:top-4 p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors border"
               >
-                <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-400" />
+                <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 text-secondary dark:text-gray-400" />
               </Link>
               <div className="w-full flex justify-center items-center">
                 <Image
@@ -90,7 +90,7 @@ export default function ForgetPassword() {
                 />
               </div>
             </div>
-            <h2 className="text-lg sm:text-xl md:text-3xl text-gray-900 font-bold dark:text-white my-3">
+            <h2 className="text-lg sm:text-xl md:text-3xl text-primary font-bold dark:text-white my-3">
               Reset Password
             </h2>
             <p className="text-secondary text-base px-2 sm:px-0">

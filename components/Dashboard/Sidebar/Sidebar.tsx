@@ -343,7 +343,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
           "h-6 w-6 shrink-0 transition-colors duration-200",
           isActive
             ? "text-[#DD655C]"
-            : "text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            : "text-secondary dark:text-gray-400 group-hover:text-primary dark:group-hover:text-white"
         )}
       />
     );
@@ -448,7 +448,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                             "flex items-center gap-3 p-3 rounded-md transition-all duration-200 group flex-1 relative",
                             isActive
                               ? "bg-[#FBECEB] text-[#DD655C] font-medium"
-                              : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+                              : "text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
                           )}
                         >
                           <span className="shrink-0">
@@ -521,7 +521,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                                   "flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 text-sm",
                                   isSubLinkActive
                                     ? "bg-[#FBECEB] text-[#DD655C] font-medium"
-                                    : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                                    : "text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
                                 )}
                               >
                                 <span className="text-sm whitespace-pre">
@@ -555,14 +555,14 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                     }}
                     className="flex-1 min-w-0"
                   >
-                    <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                    <p className="text-sm font-medium text-primary dark:text-white truncate">
                       Olivia Rhye
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                    <p className="text-xs text-secondary dark:text-gray-400 truncate">
                       Super Admin
                     </p>
                   </motion.div>
-                  <motion.button 
+                  <motion.button
                     onClick={handleLogoutClick}
                     animate={{
                       display: open ? "block" : "none",
@@ -570,7 +570,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                     }}
                     className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors"
                   >
-                    <LogOut className="h-4 w-4 text-gray-500" />
+                    <LogOut className="h-4 w-4 text-secondary" />
                   </motion.button>
                 </div>
               </div>
@@ -596,9 +596,9 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
           )}
         >
           {open ? (
-            <PanelRightOpen className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+            <PanelRightOpen className="h-4 w-4 text-secondary dark:text-gray-400" />
           ) : (
-            <PanelLeftOpen className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+            <PanelLeftOpen className="h-4 w-4 text-secondary dark:text-gray-400" />
           )}
         </button>
       </div>
@@ -622,7 +622,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
               onClick={handleCancelLogout}
               className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
             >
-              <X className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              <X className="h-5 w-5 text-secondary dark:text-gray-400" />
             </button>
 
             <div className="text-center">
@@ -630,11 +630,11 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                 <LogOut className="h-6 w-6 text-red-600 dark:text-red-400" />
               </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-lg font-semibold text-primary dark:text-white mb-2">
                 Confirm Logout
               </h3>
 
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+              <p className="text-sm text-secondary dark:text-gray-400 mb-6">
                 Are you sure you want to log out? You will need to sign in again
                 to access your account.
               </p>

@@ -198,14 +198,14 @@ export default function VerifyOtp() {
     <div className="min-h-screen flex flex-col-reverse lg:flex-row bg-primary dark:bg-primary-dark">
       {/*  OTP Verification Form */}
       <div className="flex-1 bg-primary dark:bg-primary-dark flex items-center justify-center p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
-       <div className="w-full max-w-sm sm:max-w-md lg:max-w-xl p-4 py-6 rounded-sm sm:rounded-xl border-none shadow-none bg-white">
+        <div className="w-full max-w-sm sm:max-w-md lg:max-w-xl p-4 py-6 rounded-sm sm:rounded-xl border-none shadow-none bg-white">
           <div className="text-center relative mb-4">
             <div className="flex items-center justify-center mb-2 sm:mb-4">
               <Link
                 href="/forgot-password"
-               className="absolute left-0 top-0 sm:left-2 sm:top-2 lg:left-4 lg:top-4 p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors border"
+                className="absolute left-0 top-0 sm:left-2 sm:top-2 lg:left-4 lg:top-4 p-1 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors border"
               >
-                <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-400" />
+                <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 text-secondary dark:text-gray-400" />
               </Link>
               <div className="w-full flex justify-center items-center">
                 <Image
@@ -216,7 +216,7 @@ export default function VerifyOtp() {
                 />
               </div>
             </div>
-            <h2 className="text-lg sm:text-xl md:text-3xl text-gray-900 font-bold dark:text-white my-3">
+            <h2 className="text-lg sm:text-xl md:text-3xl text-primary font-bold dark:text-white my-3">
               Check your email
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm px-2 sm:px-0">
@@ -326,7 +326,7 @@ export default function VerifyOtp() {
                     </>
                   ) : (
                     <>
-                      <span className="hidden sm:inline">Resend Code</span> 
+                      <span className="hidden sm:inline">Resend Code</span>
                       <span className="sm:hidden">Resend</span>
                     </>
                   )}

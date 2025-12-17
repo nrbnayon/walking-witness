@@ -117,7 +117,7 @@ export default function LoginForm() {
             />
           </div>
           <CardHeader className="text-center">
-            <h2 className="text-lg sm:text-2xl text-gray-900 dark:text-white">
+            <h2 className="text-lg sm:text-2xl text-primary dark:text-white">
               Welcome Back!
             </h2>
           </CardHeader>

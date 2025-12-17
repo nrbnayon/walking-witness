@@ -1,7 +1,7 @@
-'use client'
+"use client";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { HugeiconsIcon } from '@hugeicons/react';
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Delete02Icon } from "@hugeicons/core-free-icons";
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -38,8 +38,8 @@ export function DeleteConfirmationModal({
       }`}
     >
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={!isLoading ? onClose : undefined}
       />
 
@@ -52,7 +52,7 @@ export function DeleteConfirmationModal({
         <button
           onClick={onClose}
           disabled={isLoading}
-          className="absolute right-4 top-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute right-4 top-4 p-2 text-gray-400 hover:text-secondary dark:hover:text-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <X className="w-5 h-5" />
         </button>
@@ -60,24 +60,22 @@ export function DeleteConfirmationModal({
         <div className="p-6">
           <div className="mb-6 flex flex-col items-center text-center">
             <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-4 text-red-600 dark:text-red-400">
-            <HugeiconsIcon
+              <HugeiconsIcon
                 icon={Delete02Icon}
                 size={24}
                 className="text-red"
                 strokeWidth={1.5}
-            />
+              />
             </div>
-            
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              {title}
-            </h3>
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+
+            <h3 className="text-xl font-bold text-primary ">{title}</h3>
+            <p className="mt-2 text-sm text-secondary dark:text-gray-400">
               {description}
             </p>
           </div>
 
           <div className="flex gap-3">
-             <button
+            <button
               onClick={onClose}
               disabled={isLoading}
               className="flex-1 px-4 py-2.5 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

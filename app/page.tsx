@@ -15,7 +15,7 @@ export default function Home() {
         <h1 className="text-4xl font-semibold text-gray-800 mb-4">
           Welcome to Walking Witness
         </h1>
-        <p className="text-lg text-gray-600 mb-6">
+        <p className="text-lg text-secondary mb-6">
           We are here to help you build amazing applications with our modern
           design system.
         </p>

@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-
 export default function CongratulationsPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -15,7 +14,7 @@ export default function CongratulationsPage() {
             <div className="absolute inset-0 w-32 h-32 bg-gradient-to-br from-blue-100/50 to-purple-100/30 rounded-full shadow-2xl shadow-cyan-500 backdrop-blur-3xl blur-xl"></div>
             {/* Outer light circle with enhanced shadow */}
             <div className="relative w-48 h-48 bg-white/80 rounded-full shadow-2xl shadow-gray-300/60 flex items-center justify-center">
-             <Image
+              <Image
                 src="/icons/success.gif"
                 alt="404 Error Animation"
                 fill
@@ -23,17 +22,15 @@ export default function CongratulationsPage() {
                 priority
                 unoptimized
               />
-          </div>
+            </div>
           </div>
         </div>
 
         {/* Congratulation Text */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">
-          Congratulation
-        </h1>
+        <h1 className="text-4xl font-bold text-primary mb-6">Congratulation</h1>
 
         {/* Description Text */}
-        <p className="text-gray-500 text-base leading-relaxed mb-8 px-4">
+        <p className="text-secondary text-base leading-relaxed mb-8 px-4">
           Your details have been successfully recorded. The educational platform
           is currently being enhanced.
           <br />

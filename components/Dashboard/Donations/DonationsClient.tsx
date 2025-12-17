@@ -108,10 +108,11 @@ export function DonationsClient() {
     return () => clearTimeout(timer);
   }, []);
 
-  const filteredData = MOCK_DATA.filter((item) =>
-    item.projectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.leader.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.donor.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = MOCK_DATA.filter(
+    (item) =>
+      item.projectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.leader.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.donor.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -123,13 +124,13 @@ export function DonationsClient() {
       <div className="p-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-primary mb-3">Donations</h2>
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary" />
           <input
             type="text"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white  text-gray-900 dark:text-gray-100 placeholder-gray-500"
+            className="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white  text-primary  placeholder-gray-500"
           />
         </div>
       </div>
@@ -138,50 +139,101 @@ export function DonationsClient() {
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">ID</th>
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Project name</th>
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Date</th>
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Location</th>
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Leader</th>
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Donor</th>
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Amount</th>
-              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Status</th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                ID
+              </th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                Project name
+              </th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                Date
+              </th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                Location
+              </th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                Leader
+              </th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                Donor
+              </th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                Amount
+              </th>
+              <th className="p-5 font-medium text-secondary dark:text-gray-400">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
             {isLoading
               ? Array.from({ length: 7 }).map((_, index) => (
                   <tr key={index} className="bg-white ">
-                    <td className="px-5 py-4"><Skeleton className="h-4 w-20" /></td>
-                    <td className="px-5 py-4"><Skeleton className="h-4 w-32" /></td>
-                    <td className="px-5 py-4"><Skeleton className="h-4 w-24" /></td>
+                    <td className="px-5 py-4">
+                      <Skeleton className="h-4 w-20" />
+                    </td>
+                    <td className="px-5 py-4">
+                      <Skeleton className="h-4 w-32" />
+                    </td>
+                    <td className="px-5 py-4">
+                      <Skeleton className="h-4 w-24" />
+                    </td>
                     <td className="px-5 py-4">
                       <div className="flex flex-col gap-1">
                         <Skeleton className="h-4 w-24" />
                         <Skeleton className="h-3 w-16" />
                       </div>
                     </td>
-                    <td className="px-5 py-4"><Skeleton className="h-4 w-24" /></td>
-                    <td className="px-5 py-4"><Skeleton className="h-4 w-24" /></td>
-                    <td className="px-5 py-4"><Skeleton className="h-4 w-16" /></td>
-                    <td className="px-5 py-4"><Skeleton className="h-6 w-16 rounded-full" /></td>
+                    <td className="px-5 py-4">
+                      <Skeleton className="h-4 w-24" />
+                    </td>
+                    <td className="px-5 py-4">
+                      <Skeleton className="h-4 w-24" />
+                    </td>
+                    <td className="px-5 py-4">
+                      <Skeleton className="h-4 w-16" />
+                    </td>
+                    <td className="px-5 py-4">
+                      <Skeleton className="h-6 w-16 rounded-full" />
+                    </td>
                   </tr>
                 ))
               : currentData.map((item, index) => (
-                  <tr key={index} className="bg-white  hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                    <td className="px-5 py-4 text-gray-500 dark:text-gray-400">{item.id}</td>
-                    <td className="px-5 py-4 font-medium text-gray-900 dark:text-gray-100">{item.projectName}</td>
-                    <td className="px-5 py-4 text-gray-500 dark:text-gray-400">{item.date}</td>
-                    <td className="px-5 py-4 text-gray-500 dark:text-gray-400">
+                  <tr
+                    key={index}
+                    className="bg-white  hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                  >
+                    <td className="px-5 py-4 text-secondary dark:text-gray-400">
+                      {item.id}
+                    </td>
+                    <td className="px-5 py-4 font-medium text-primary ">
+                      {item.projectName}
+                    </td>
+                    <td className="px-5 py-4 text-secondary dark:text-gray-400">
+                      {item.date}
+                    </td>
+                    <td className="px-5 py-4 text-secondary dark:text-gray-400">
                       <div className="flex flex-col">
-                        <span>{item.location.city}, {item.location.state}</span>
+                        <span>
+                          {item.location.city}, {item.location.state}
+                        </span>
                       </div>
                     </td>
-                    <td className="px-5 py-4 text-primary dark:text-blue-400">{item.leader}</td>
-                    <td className="px-5 py-4 text-gray-500 dark:text-gray-400">{item.donor}</td>
-                    <td className="px-5 py-4 text-gray-900 dark:text-gray-100">{item.amount}</td>
+                    <td className="px-5 py-4 text-primary dark:text-blue-400">
+                      {item.leader}
+                    </td>
+                    <td className="px-5 py-4 text-secondary dark:text-gray-400">
+                      {item.donor}
+                    </td>
+                    <td className="px-5 py-4 text-primary ">{item.amount}</td>
                     <td className="px-5 py-4">
-                      <Badge variant={item.status.toLowerCase() === "active" ? "active" : "pending"}>
+                      <Badge
+                        variant={
+                          item.status.toLowerCase() === "active"
+                            ? "active"
+                            : "pending"
+                        }
+                      >
                         {item.status}
                       </Badge>
                     </td>

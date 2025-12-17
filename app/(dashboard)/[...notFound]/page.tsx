@@ -46,7 +46,6 @@ export default function DashboardNotFound() {
     },
   };
 
-
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-x">
       <motion.div
@@ -72,7 +71,7 @@ export default function DashboardNotFound() {
           {/* Title */}
           <motion.h1
             variants={itemVariants}
-            className="text-2xl md:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight"
+            className="text-2xl md:text-2xl lg:text-3xl font-bold text-primary tracking-tight"
           >
             {lastSegment
               ? `${lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)}`
@@ -103,7 +102,6 @@ export default function DashboardNotFound() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row gap-4"
         >
-
           <Button
             asChild
             variant="outline"
@@ -134,7 +132,7 @@ export default function DashboardNotFound() {
         {/* Progress Indicator */}
         <motion.div
           variants={itemVariants}
-          className="mt-12 flex items-center gap-2 text-sm text-gray-500"
+          className="mt-12 flex items-center gap-2 text-sm text-secondary"
         >
           <motion.div
             className="flex gap-1"
