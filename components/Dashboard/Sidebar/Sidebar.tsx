@@ -106,6 +106,10 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
         label: "Upload",
         href: "/upload",
         icon: CloudUploadIcon,
+        subLinks: [
+          { label: "Books", href: "/upload/book" },
+          { label: "Content", href: "/upload/content" },
+        ],
       },
       {
         label: "Privacy & Policy",
