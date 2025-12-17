@@ -86,7 +86,7 @@ export function ProjectsClient() {
       Declined: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
     };
     return (
-      <span className={cn("px-2 py-1 rounded-full text-xs font-medium", styles[status])}>
+      <span className={cn("px-2 pb-1 rounded-full text-xs font-medium", styles[status])}>
         {status}
       </span>
     );
@@ -127,26 +127,26 @@ export function ProjectsClient() {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
-                <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Project name</th>
-                <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Date</th>
-                <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Location</th>
-                <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Leader</th>
-                <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Amount</th>
-                <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Status</th>
-                <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Action</th>
+                <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Project name</th>
+                <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Date</th>
+                <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Location</th>
+                <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Leader</th>
+                <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Amount</th>
+                <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Status</th>
+                <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {isLoading
                 ? Array.from({ length: 7 }).map((_, index) => (
                     <tr key={index} className="bg-white dark:bg-gray-800">
-                      <td className="px-6 py-4"><Skeleton className="h-4 w-32" /></td>
-                      <td className="px-6 py-4"><Skeleton className="h-4 w-24" /></td>
-                      <td className="px-6 py-4"><Skeleton className="h-4 w-16" /></td>
-                      <td className="px-6 py-4"><Skeleton className="h-4 w-20" /></td>
-                      <td className="px-6 py-4"><Skeleton className="h-4 w-20" /></td>
-                      <td className="px-6 py-4"><Skeleton className="h-4 w-20" /></td>
-                      <td className="px-6 py-4 flex gap-4"><Skeleton className="h-4 w-16" /><Skeleton className="h-4 w-16" /></td>
+                      <td className="p-5"><Skeleton className="h-4 w-32" /></td>
+                      <td className="p-5"><Skeleton className="h-4 w-24" /></td>
+                      <td className="p-5"><Skeleton className="h-4 w-16" /></td>
+                      <td className="p-5"><Skeleton className="h-4 w-20" /></td>
+                      <td className="p-5"><Skeleton className="h-4 w-20" /></td>
+                      <td className="p-5"><Skeleton className="h-4 w-20" /></td>
+                      <td className="p-5 flex gap-4"><Skeleton className="h-4 w-16" /><Skeleton className="h-4 w-16" /></td>
                     </tr>
                   ))
                 : currentData.length > 0 ? currentData.map((item) => (
@@ -155,15 +155,15 @@ export function ProjectsClient() {
                       onClick={() => handleRowClick(item.id)}
                       className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer"
                     >
-                      <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-100">{item.projectName}</td>
-                      <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{item.date}</td>
-                      <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{item.location}</td>
-                      <td className="px-6 py-4 text-primary dark:text-blue-400">{item.leader}</td>
-                      <td className="px-6 py-4 text-gray-900 dark:text-gray-100">{item.amount}</td>
-                      <td className="px-6 py-4">
+                      <td className="p-5 font-medium text-gray-900 dark:text-gray-100">{item.projectName}</td>
+                      <td className="p-5 text-gray-500 dark:text-gray-400">{item.date}</td>
+                      <td className="p-5 text-gray-500 dark:text-gray-400">{item.location}</td>
+                      <td className="p-5 text-primary dark:text-blue-400">{item.leader}</td>
+                      <td className="p-5 text-gray-900 dark:text-gray-100">{item.amount}</td>
+                      <td className="p-5">
                         <StatusBadge status={item.status} />
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="p-5">
                         <div className="flex items-center gap-4 font-medium" onClick={(e) => e.stopPropagation()}>
                           {item.status !== 'Approved' && (
                             <button 

@@ -1,16 +1,12 @@
 import { StatsCard } from "@/components/Dashboard/Shared/StatsCard";
 import { DonationsClient } from "@/components/Dashboard/Donations/DonationsClient";
+import DashboardHeader from "@/components/Dashboard/Shared/DashboardHeader";
 
 export default function DonationsPage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50">Donations</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Track, manage and forecast your customers and Donations.
-        </p>
-      </div>
-
+    <div >
+       <DashboardHeader title="Donations" description="Track, manage and forecast your customers and Donations." />
+      <div className="p-4 md:p-8 w-full mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <StatsCard
           label="Total Donations"
@@ -28,9 +24,9 @@ export default function DonationsPage() {
         />
       </div>
 
-      <div className="space-y-4">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-50">Donations</h2>
+      <div className="space-y-4 mt-6">
         <DonationsClient />
+      </div>
       </div>
     </div>
   );
