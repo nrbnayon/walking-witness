@@ -1,5 +1,7 @@
 // types\leader-request.ts
 
+export type RequestStatus = "Pending" | "Approved" | "Declined";
+
 export interface Request {
   id: string;
   leader: string;
@@ -7,4 +9,5 @@ export interface Request {
   date: string;
   location: string;
   amount: string;
+  status?: RequestStatus; 
 }

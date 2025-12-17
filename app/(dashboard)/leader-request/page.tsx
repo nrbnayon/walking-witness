@@ -1,7 +1,23 @@
+// app\(dashboard)\leader-request\page.tsx
+"use client";
+
+import { useRef } from "react";
 import { LeaderRequestClient } from "@/components/Dashboard/LeaderRequest/LeaderRequestClient";
 import { Button } from "@/components/ui/button";
 
 export default function LeaderRequestPage() {
+  const handleApproveAll = () => {
+    if (typeof window !== 'undefined' && (window as any).handleApproveAll) {
+      (window as any).handleApproveAll();
+    }
+  };
+
+  const handleDeclineAll = () => {
+    if (typeof window !== 'undefined' && (window as any).handleDeclineAll) {
+      (window as any).handleDeclineAll();
+    }
+  };
+
   return (
     <div className="p-4 md:p-8 w-full mx-auto space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -12,16 +28,24 @@ export default function LeaderRequestPage() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" className="bg-[#344054] text-white hover:bg-[#475467] border-transparent">
+          <Button 
+            variant="outline" 
+            className="bg-[#344054] text-white hover:bg-[#475467] border-transparent hover:text-white"
+            onClick={handleApproveAll}
+          >
             Approve All
           </Button>
-          <Button variant="outline" className="border-gray-300 dark:border-gray-600">
+          <Button 
+            variant="outline" 
+            className="border-gray-300 dark:border-gray-600"
+            onClick={handleDeclineAll}
+          >
             Decline All
           </Button>
         </div>
       </div>
 
-      <LeaderRequestClient />
+      <LeaderRequestClient onApproveAll={handleApproveAll} onDeclineAll={handleDeclineAll} />
     </div>
   );
 }

@@ -10,6 +10,7 @@ export const MOCK_DATA: Request[] = [
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
     amount: "$2,800",
+    status: "Pending",
   },
   {
     id: "req-2",
@@ -18,6 +19,7 @@ export const MOCK_DATA: Request[] = [
     date: "Jan 6, 2025",
     location: "Overland Park, KS",
     amount: "$3,500",
+    status: "Approved"
   },
   {
     id: "req-3",
