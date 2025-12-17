@@ -5,75 +5,7 @@ import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { Pagination } from "@/components/Dashboard/Shared/Pagination";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
-
-interface Request {
-  id: string;
-  leader: string;
-  projectName: string;
-  date: string;
-  location: string;
-  amount: string;
-}
-
-const MOCK_DATA: Request[] = [
-  {
-    id: "req-1",
-    leader: "Phoenix Baker",
-    projectName: "Mwati Village",
-    date: "Jan 6, 2025",
-    location: "Overland Park, KS",
-    amount: "$2,800",
-  },
-  {
-    id: "req-2",
-    leader: "Drew cano",
-    projectName: "Kitui Hills",
-    date: "Jan 6, 2025",
-    location: "Overland Park, KS",
-    amount: "$3,500",
-  },
-  {
-    id: "req-3",
-    leader: "Phoenix Baker",
-    projectName: "Kasama Town",
-    date: "Jan 6, 2025",
-    location: "Overland Park, KS",
-    amount: "$1,800",
-  },
-  {
-    id: "req-4",
-    leader: "Drew cano",
-    projectName: "Mwati Village",
-    date: "Jan 6, 2025",
-    location: "Overland Park, KS",
-    amount: "$2,800",
-  },
-  {
-    id: "req-5",
-    leader: "Phoenix Baker",
-    projectName: "Kitui Hills",
-    date: "Jan 6, 2025",
-    location: "Overland Park, KS",
-    amount: "$3,500",
-  },
-  {
-    id: "req-6",
-    leader: "Drew cano",
-    projectName: "Kasama Town",
-    date: "Jan 6, 2025",
-    location: "Overland Park, KS",
-    amount: "$1,800",
-  },
-  {
-    id: "req-7",
-    leader: "Phoenix Baker",
-    projectName: "Mwati Village",
-    date: "Jan 6, 2025",
-    location: "Overland Park, KS",
-    amount: "$2,600",
-  },
-];
+import { MOCK_DATA } from "@/data/leader-request";
 
 export function LeaderRequestClient() {
   const router = useRouter();
@@ -108,8 +40,9 @@ export function LeaderRequestClient() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+    <div className="bg-white border border-gray-200  rounded-lg shadow-sm">
+      <div className="p-4 border-b border-gray-200">
+        <h2 className="text-lg font-semibold text-primary mb-3">Leader Request</h2>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
           <input
@@ -117,51 +50,51 @@ export function LeaderRequestClient() {
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500"
+            className="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white  text-primary dark:text-gray-100 placeholder-gray-500"
           />
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-b-lg">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
-              <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Leader</th>
-              <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Project name</th>
-              <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Date</th>
-              <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Location</th>
-              <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Amount</th>
-              <th className="px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Action</th>
+            <tr className="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 ">
+              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Leader</th>
+              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Project name</th>
+              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Date</th>
+              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Location</th>
+              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Amount</th>
+              <th className="p-5 font-medium text-gray-500 dark:text-gray-400">Action</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
             {isLoading
               ? Array.from({ length: 7 }).map((_, index) => (
-                  <tr key={index} className="bg-white dark:bg-gray-800">
-                    <td className="px-6 py-4"><Skeleton className="h-4 w-24" /></td>
-                    <td className="px-6 py-4"><Skeleton className="h-4 w-32" /></td>
-                    <td className="px-6 py-4"><Skeleton className="h-4 w-24" /></td>
-                    <td className="px-6 py-4"><Skeleton className="h-4 w-32" /></td>
-                    <td className="px-6 py-4"><Skeleton className="h-4 w-16" /></td>
-                    <td className="px-6 py-4 flex gap-4"><Skeleton className="h-4 w-16" /><Skeleton className="h-4 w-16" /></td>
+                  <tr key={index} className="bg-white ">
+                    <td className="px-5 py-4"><Skeleton className="h-4 w-24" /></td>
+                    <td className="px-5 py-4"><Skeleton className="h-4 w-32" /></td>
+                    <td className="px-5 py-4"><Skeleton className="h-4 w-24" /></td>
+                    <td className="px-5 py-4"><Skeleton className="h-4 w-32" /></td>
+                    <td className="px-5 py-4"><Skeleton className="h-4 w-16" /></td>
+                    <td className="px-5 py-4 flex gap-4"><Skeleton className="h-4 w-16" /><Skeleton className="h-4 w-16" /></td>
                   </tr>
                 ))
               : currentData.map((item, index) => (
                   <tr 
                     key={index} 
                     onClick={() => handleRowClick(item.id)}
-                    className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer"
+                    className="bg-white hover:bg-gray-50 transition-colors cursor-pointer"
                   >
-                    <td className="px-6 py-4 text-primary dark:text-blue-400">{item.leader}</td>
-                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-100">{item.projectName}</td>
-                    <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{item.date}</td>
-                    <td className="px-6 py-4 text-gray-500 dark:text-gray-400">{item.location}</td>
-                    <td className="px-6 py-4 text-gray-900 dark:text-gray-100">{item.amount}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-5 py-4 text-primary">{item.leader}</td>
+                    <td className="px-5 py-4 font-medium text-primary">{item.projectName}</td>
+                    <td className="px-5 py-4 text-gray-500">{item.date}</td>
+                    <td className="px-5 py-4 text-gray-500">{item.location}</td>
+                    <td className="px-5 py-4 text-primary">{item.amount}</td>
+                    <td className="px-5 py-4">
                       <div className="flex items-center gap-4 font-medium">
                         <button 
                           onClick={(e) => handleAction(e, "Approve", item.id)}
-                          className="text-[#027A48] hover:text-[#026aa2] dark:text-green-400 dark:hover:text-green-300 transition-colors"
+                          className="text-[#027A48] hover:text-[#026aa2] transition-colors"
                         >
                           Approve
                         </button>
@@ -183,7 +116,7 @@ export function LeaderRequestClient() {
         currentPage={currentPage}
         totalPages={isLoading ? 1 : totalPages}
         onPageChange={setCurrentPage}
-        className="border-t border-gray-200 dark:border-gray-700"
+        className="border-t border-gray-200 "
       />
     </div>
   );

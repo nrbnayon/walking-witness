@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function LeaderRequestPage() {
   return (
-    <div className="space-y-6">
+    <div className="p-4 md:p-8 w-full mx-auto space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50">Leader request</h1>
