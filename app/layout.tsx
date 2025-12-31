@@ -84,7 +84,7 @@ export const metadata: Metadata = {
   category: "Software",
   classification: "Dashboard Management System",
   // PWA Configuration
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
