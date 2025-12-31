@@ -5,7 +5,7 @@ import { UploadDetails } from "@/components/Dashboard/Upload/UploadDetails";
 export default async function UploadDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   const isNew = id === "new";

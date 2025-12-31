@@ -83,6 +83,14 @@ export const metadata: Metadata = {
   },
   category: "Software",
   classification: "Dashboard Management System",
+  // PWA Configuration
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Walking Witness",
+  },
+  applicationName: "Walking Witness",
 };
 
 export default function RootLayout({
@@ -98,8 +106,32 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
         <meta name="theme-color" content="#FBECEB" />
+
+        {/* Standard favicon */}
         <link rel="icon" href="/favicon.ico" />
+
+        {/* Apple Touch Icon */}
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon-192x192.png" />
+
+        {/* PWA iOS support */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Walking Witness" />
+
+        {/* Splash screens for iOS (optional but recommended) */}
+        <link
+          rel="apple-touch-startup-image"
+          href="/splash-640x1136.png"
+          media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="/splash-750x1334.png"
+          media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+        />
+
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

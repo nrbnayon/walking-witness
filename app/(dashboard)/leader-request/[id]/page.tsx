@@ -1,10 +1,11 @@
-// app\(dashboard)\leader-request\[id]\page.tsx // dynamically get data and for functionality
+// app\(dashboard)\leader-request\[id]\page.tsx
 import { RequestDetails } from "@/components/Dashboard/LeaderRequest/RequestDetails";
 
+// Fix the type definition - params should be a Promise
 export default async function RequestDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
 

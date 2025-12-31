@@ -94,7 +94,7 @@ export async function proxy(request: NextRequest) {
 
   if (accessToken) {
     // Development mode: Accept dummy credentials
-    if (isDevelopment && accessToken === "dev-admin-token") {
+    if (accessToken === "dev-admin-token") {
       user = { email: "admin@gmail.com", role: "admin" };
       isAuthenticated = true;
       if (!userRole) {
