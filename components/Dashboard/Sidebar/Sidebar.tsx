@@ -27,7 +27,7 @@ import type { IconSvgElement } from "@hugeicons/react";
 import {
   Home07Icon,
   UserGroupIcon,
-  ManagerIcon,
+  // ManagerIcon,
   CloudUploadIcon,
   ShieldUserIcon,
   ShoppingBasket03Icon,
@@ -83,7 +83,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
         href: "/users",
         icon: UserGroupIcon,
         subLinks: [
-          { label: "Leader", href: "/users/leader" },
+          // { label: "Leader", href: "/users/leader" },
           { label: "Donor", href: "/users/donor" },
         ],
       },
@@ -97,11 +97,11 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
         href: "/projects",
         icon: Briefcase01Icon,
       },
-      {
-        label: "Leader request",
-        href: "/leader-request",
-        icon: ManagerIcon,
-      },
+      // {
+      //   label: "Leader request",
+      //   href: "/leader-request",
+      //   icon: ManagerIcon,
+      // },
       {
         label: "Upload",
         href: "/upload",
@@ -425,6 +425,16 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                     filteredSubLinks &&
                     filteredSubLinks.length > 0;
 
+                  // Close sidebar on mobile after navigation
+                  const handleLinkClick = () => {
+                    if (
+                      typeof window !== "undefined" &&
+                      window.innerWidth < 768
+                    ) {
+                      setOpen(false);
+                    }
+                  };
+
                   return (
                     <div
                       key={idx}
@@ -448,6 +458,7 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                       <div className="flex items-center relative">
                         <Link
                           href={link.href}
+                          onClick={handleLinkClick}
                           className={cn(
                             "flex items-center gap-3 p-3 rounded-md transition-all duration-200 group flex-1 relative",
                             isActive
@@ -517,10 +528,20 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
                               pathname === subLink.href ||
                               pathname.startsWith(subLink.href + "/");
 
+                            const handleSubLinkClick = () => {
+                              if (
+                                typeof window !== "undefined" &&
+                                window.innerWidth < 768
+                              ) {
+                                setOpen(false);
+                              }
+                            };
+
                             return (
                               <Link
                                 key={subIdx}
                                 href={subLink.href}
+                                onClick={handleSubLinkClick}
                                 className={cn(
                                   "flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 text-sm",
                                   isSubLinkActive
@@ -547,7 +568,10 @@ export default function DashboardWrapper({ children }: DashboardWrapperProps) {
               {/* User Profile */}
               <div className="mt-4 pt-4 border-t border-[#E7EAED]">
                 <div className="flex items-center gap-3 px-3">
-                  <Link href="/profile" className="flex items-center gap-3 flex-1 min-w-0 hover:opacity-80 transition-opacity">
+                  <Link
+                    href="/profile"
+                    className="flex items-center gap-3 flex-1 min-w-0 hover:opacity-80 transition-opacity"
+                  >
                     <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center shrink-0">
                       <span className="text-pink-600 font-semibold text-sm">
                         OR
@@ -696,7 +720,7 @@ const Logo = ({ open }: { open: boolean }) => {
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-1 bg-card min-h-0">
-      <div className="p-0 rounded-tl-2xl bg-white dark:bg-background flex flex-col gap-2 flex-1 w-full overflow-y-auto overflow-x-hidden scrollbar-custom scrollbar-thin">
+      <div className="p-0 rounded-none md:rounded-tl-2xl bg-white flex flex-col gap-2 flex-1 w-full overflow-y-auto overflow-x-hidden scrollbar-custom scrollbar-thin">
         {children}
       </div>
     </div>

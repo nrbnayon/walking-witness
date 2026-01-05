@@ -113,7 +113,7 @@ export default function LoginForm() {
               alt="logo"
               width={120}
               height={120}
-              className="w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
+              className="w-25 h-25 md:w-50 md:h-50"
             />
           </div>
           <CardHeader className="text-center">

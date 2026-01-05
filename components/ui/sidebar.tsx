@@ -145,19 +145,25 @@ export const MobileSidebar = ({
         </div>
         <AnimatePresence>
           {open && (
-            <motion.div
-              initial={{ x: "-100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "-100%", opacity: 0 }}
-              transition={{
-                duration: 0.3,
-                ease: "easeInOut",
-              }}
-              className={cn(
-                "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-100 flex flex-col justify-between",
-                className
-              )}
-            >
+            <>
+              {/* Overlay backdrop - full screen clickable area */}
+              <div
+                className="fixed inset-0 bg-black/50 z-90 md:hidden"
+                onClick={() => setOpen(false)}
+              />
+              <motion.div
+                initial={{ x: "-100%", opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: "-100%", opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
+                className={cn(
+                  "fixed h-full w-2/3 inset-y-0 left-0 bg-white dark:bg-neutral-900 p-10 z-100 flex flex-col justify-between",
+                  className
+                )}
+              >
               <div
                 className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200 cursor-pointer"
                 onClick={() => setOpen(!open)}
@@ -166,6 +172,7 @@ export const MobileSidebar = ({
               </div>
               {children}
             </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

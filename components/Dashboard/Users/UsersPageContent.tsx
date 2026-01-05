@@ -47,12 +47,11 @@ export function UsersPageContent() {
             {/* Tabs */}
             <div className="flex bg-gray-50 dark:bg-gray-700/50 p-1 rounded-lg">
               {tabs.map((tab) => {
-                const isActive =
-                  pathname === tab.href ||
-                  (tab.href === "/users" && pathname === "/users");
+                // const isActive =
+                //   pathname === tab.href ||
+                //   (tab.href === "/users" && pathname === "/users");
                 const active =
                   (tab.name === "All" && pathname === "/users") ||
-                  (tab.name === "Leader" && pathname.includes("/leader")) ||
                   (tab.name === "Donor" && pathname.includes("/donor"));
 
                 return (
