@@ -1,8 +1,5 @@
+import OverviewPage from "./overview/page";
 
 export default function page() {
-  return (
-    <div>
-      Welcome to the dashboard
-    </div>
-  )
+  return <OverviewPage />;
 }
