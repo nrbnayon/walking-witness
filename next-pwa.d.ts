@@ -1,4 +1,4 @@
-declare module "next-pwa" {
+declare module "@ducanh2912/next-pwa" {
   import type { NextConfig } from "next";
 
   interface PWAConfig {
@@ -6,6 +6,8 @@ declare module "next-pwa" {
     disable?: boolean;
     register?: boolean;
     skipWaiting?: boolean;
+    scope?: string;
+    sw?: string;
     [key: string]: unknown;
   }
 

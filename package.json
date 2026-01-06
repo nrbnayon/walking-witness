@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.9",
     "@hookform/resolvers": "^5.2.2",
     "@hugeicons/core-free-icons": "^3.0.0",
     "@hugeicons/react": "^1.1.2",
@@ -33,7 +34,6 @@
     "lucide-react": "^0.561.0",
     "motion": "^12.23.26",
     "next": "16.0.10",
-    "next-pwa": "^5.6.0",
     "next-themes": "^0.4.6",
     "npm": "^11.7.0",
     "react": "19.2.1",
