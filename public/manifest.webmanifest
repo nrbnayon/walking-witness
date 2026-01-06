@@ -10,49 +10,49 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "/icon-72x72.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-96x96.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-128x128.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-144x144.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-152x152.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-192x192.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-384x384.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-512x512.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -61,14 +61,14 @@
   "categories": ["productivity", "business", "utilities"],
   "screenshots": [
     {
-      "src": "/screenshot-mobile.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "540x720",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Dashboard Overview"
     },
     {
-      "src": "/screenshot-desktop.png",
+      "src": "/web-app-manifest-192x192.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
@@ -83,7 +83,7 @@
       "url": "/dashboard",
       "icons": [
         {
-          "src": "/icon-192x192.png",
+          "src": "/web-app-manifest-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -96,7 +96,7 @@
       "url": "/users",
       "icons": [
         {
-          "src": "/icon-192x192.png",
+          "src": "/web-app-manifest-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -109,7 +109,7 @@
       "url": "/donations",
       "icons": [
         {
-          "src": "/icon-192x192.png",
+          "src": "/web-app-manifest-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
