@@ -4,12 +4,12 @@ export const PROJECT_CATEGORIES = [
   "Goat",
   "Pig",
   "Business",
-  "Become The Movement",
-  "Kingdom Empowerment",
-  "Walking Witness Women",
-  "Adopt A Village / Prison",
-  "Bible Books And More",
-  "Living in The Kingdom",
+  // "Become The Movement",
+  // "Kingdom Empowerment",
+  // "Walking Witness Women",
+  // "Adopt A Village / Prison",
+  // "Bible Books And More",
+  // "Living in The Kingdom",
 ];
 
 export interface LeaderRequestDetails {

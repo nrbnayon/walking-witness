@@ -1,97 +1,78 @@
 // data\projects.ts
-import { Project, ProjectDetail, ProjectStatus } from "@/types/projects";
+import { Project, ProjectDetail } from "@/types/projects";
 
 const INITIAL_PROJECTS: Project[] = [
   {
     id: "proj-1",
-    projectName: "Mwati Village",
+    title: "Mwati Village",
     date: "Jan 6, 2025",
     location: "Tanzania",
-    leader: "Phoenix Baker",
-    amount: "$2,800",
-    status: "Pending",
+    category: "Cow",
   },
   {
     id: "proj-2",
-    projectName: "Kitui Hills",
+    title: "Kitui Hills",
     date: "Jan 6, 2025",
     location: "Tanzania",
-    leader: "Drew cano",
-    amount: "$3,500",
-    status: "Approved",
+    category: "Chicken",
   },
   {
     id: "proj-3",
-    projectName: "Kasama Town",
+    title: "Kasama Town",
     date: "Jan 6, 2025",
     location: "Tanzania",
-    leader: "Phoenix Baker",
-    amount: "$1,800",
-    status: "Declined",
+    category: "Goat",
   },
   {
     id: "proj-4",
-    projectName: "Mwati Village",
+    title: "Mwati Village",
     date: "Jan 6, 2025",
     location: "Tanzania",
-    leader: "Drew cano",
-    amount: "$2,800",
-    status: "Approved",
+    category: "Pig",
   },
   {
     id: "proj-5",
-    projectName: "Kitui Hills",
+    title: "Kitui Hills",
     date: "Jan 6, 2025",
     location: "Tanzania",
-    leader: "Phoenix Baker",
-    amount: "$3,500",
-    status: "Pending",
+    category: "Chicken",
   },
   {
     id: "proj-6",
-    projectName: "Kasama Town",
+    title: "Kasama Town",
     date: "Jan 6, 2025",
     location: "Tanzania",
-    leader: "Drew cano",
-    amount: "$1,800",
-    status: "Approved",
+    category: "Cow",
   },
   {
     id: "proj-7",
-    projectName: "Mwati Village",
+    title: "Mwati Village",
     date: "Jan 6, 2025",
     location: "Tanzania",
-    leader: "Phoenix Baker",
-    amount: "$2,600",
-    status: "Pending",
+    category: "Business",
   },
 ];
 
 const INITIAL_DETAILS: Record<string, ProjectDetail> = {
   "proj-1": {
     id: "proj-1",
-    projectName: "Mwati Village",
+    title: "Mwati Village",
     date: "Jan 6, 2025",
-    leader: "Phoenix Baker",
-    amount: "$2,800",
-    status: "Pending",
+    location: "Tanzania",
+    category: "Cow",
+    program: "Kingdom Empowerment",
     village: "Kirembe Park View",
-    location: "Lower Kasese, Kasese District Uganda",
+    basicInfoLocation: "Lower Kasese, Kasese District Uganda",
     pastor: "Alvin",
     sponsor: "Eric Lumika",
     established: "8/11/24",
-    category: "Cow",
     stories: "In a small village in Uganda, families wake up each day hoping for enough water and food to make it through. Children walk long distances to school, their dreams bigger than their circumstances. Mothers work tirelessly—farming, cooking, caring—yet still struggle to provide the basics. Even with so little, the community holds onto hope, sharing whatever they have. Their resilience shines brighter than their hardships, reminding us of the strength in unity.",
     details: "The first batch of cow farm training has been successfully completed.",
-    updates: "The first batch of cow farm training has been successfully completed.",
+    recentUpdates: "The first batch of cow farm training has been successfully completed.",
     impact: "120 families have directly benefited from our projects.",
-    pastorSupport: [100, 100, 100],
-    livestock: [
-      { name: "$100 Chickens", count: 35 },
-      { name: "$100 Chickens", count: 35 },
-      { name: "$100 Chickens", count: 35 },
-    ],
-    other: [100],
+    pastorSupport: ["$100 USD", "$100 USD", "$100 USD"],
+    livestock: ["$100 Chickens (35)", "$100 Chickens (35)", "$100 Chickens (35)"],
+    other: ["$100 USD"],
   },
 };
 
@@ -117,18 +98,23 @@ export const ProjectsService = {
     return {
       ...project,
       ...(detail || {
+        program: "",
         village: "",
+        basicInfoLocation: "",
         pastor: "",
         sponsor: "",
         established: new Date().toLocaleDateString(),
-        category: "Cow",
         stories: "",
         details: "",
-        updates: "",
+        recentUpdates: "",
         impact: "",
         pastorSupport: [],
         livestock: [],
         other: [],
+        title: project.title, // Ensure title is preserved
+        date: project.date,
+        location: project.location,
+        category: project.category
       }),
     };
   },
@@ -138,21 +124,12 @@ export const ProjectsService = {
     const newId = `proj-${Date.now()}`;
     const newProject: Project = {
       id: newId,
-      projectName: data.projectName || data.village, // Fallback
+      title: data.title || "Untitled",
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       location: data.location,
-      leader: data.pastor, // Mapping pastor to leader for list view
-      amount: "$0", // Calculate from support/livestock
-      status: "Pending",
+      category: data.category
     };
     
-    // Calculate amount
-    const totalAmount = (data.pastorSupport?.reduce((a, b) => a + b, 0) || 0) + 
-                        (data.other?.reduce((a, b) => a + b, 0) || 0) +
-                        (data.livestock?.reduce((a, b) => a + (b.count * 100), 0) || 0); // Assuming 100 per unit for mock
-    
-    newProject.amount = `$${totalAmount.toLocaleString()}`;
-
     const newDetail: ProjectDetail = {
       ...newProject,
       ...data,
@@ -175,10 +152,9 @@ export const ProjectsService = {
 
     const updatedProject = {
       ...existingProject,
-      projectName: data.projectName || existingProject.projectName,
+      title: data.title || existingProject.title,
       location: data.location || existingProject.location,
-      leader: data.pastor || existingProject.leader,
-      // Recalculate amount if needed, skipping for simple update
+      category: data.category || existingProject.category
     };
 
     const updatedDetail = {
@@ -191,17 +167,6 @@ export const ProjectsService = {
     details[id] = updatedDetail;
 
     return updatedProject;
-  },
-
-  updateStatus: async (id: string, status: ProjectStatus): Promise<void> => {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    const index = projects.findIndex((p) => p.id === id);
-    if (index !== -1) {
-      projects[index] = { ...projects[index], status };
-    }
-    if (details[id]) {
-      details[id] = { ...details[id], status };
-    }
   },
   
   delete: async (id: string): Promise<void> => {

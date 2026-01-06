@@ -1,30 +1,31 @@
-export type ProjectStatus = 'Pending' | 'Approved' | 'Declined';
-
 export interface Project {
   id: string;
-  projectName: string;
+  title: string; // Project name column in list, Project Title in details
   date: string;
   location: string;
-  leader: string;
-  amount: string;
-  status: ProjectStatus;
+  category: string;
 }
 
 export interface ProjectDetail extends Project {
+  program: string; // Project Name in details (e.g. Kingdom Empowerment)
+  
+  // Basic Information
   village: string;
+  basicInfoLocation: string; // Location in basic info
   pastor: string;
   sponsor: string;
   established: string;
-  category: string;
+  
+  // Content
   stories: string;
   details: string;
-  updates: string;
+  recentUpdates: string;
   impact: string;
+  
+  // Lists
+  pastorSupport: string[];
+  livestock: string[];
+  other: string[];
+  
   coverImage?: string;
-  pastorSupport: number[];
-  livestock: {
-    name: string;
-    count: number;
-  }[];
-  other: number[];
 }
